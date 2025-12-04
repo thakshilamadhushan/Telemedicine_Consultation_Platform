@@ -1,0 +1,176 @@
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+
+const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <AppBar position="fixed" sx={{ backgroundColor: "white", boxShadow: 1 }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+
+          {/* LOGO (Desktop) */}
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 20,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'Montserrat',
+              fontWeight: 800,
+              color: '#009dff',
+              textDecoration: 'none',
+            }}
+          >
+            HealthLink
+          </Typography>
+
+          {/* MOBILE MENU BUTTON */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon sx={{ color: "black" }} />
+            </IconButton>
+
+            {/* MOBILE DROPDOWN MENU */}
+            <Menu
+              anchorEl={anchorElNav}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+            >
+              {/* Navigation pages */}
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+
+              {/* Sign In button (inside menu) */}
+              <MenuItem>
+                <Button fullWidth variant="outlined" sx={{ color: "black", borderColor: "black" }}>
+                  Sign In
+                </Button>
+              </MenuItem>
+
+              {/* Book Consultation button (inside menu) */}
+              <MenuItem>
+                <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }}>
+                  Book Consultation
+                </Button>
+              </MenuItem>
+            </Menu>
+          </Box>
+
+          {/* LOGO (Mobile) */}
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              flexGrow: 10,
+              display: { xs: 'flex', md: 'none' },
+              fontFamily: 'Montserrat',
+              fontWeight: 800,
+              color: '#009dff',
+              textDecoration: 'none',
+            }}
+          >
+            HealthLink
+          </Typography>
+          <IconButton sx={{ 
+            flexGrow: 1,
+            display: { xs: 'flex', md: 'none' },
+          }}>
+            <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+
+          {/* DESKTOP MENU ITEMS */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 4 }}>
+            {pages.map((page) => (
+              <Button key={page} sx={{ my: 2, color: "black" }}
+                onClick={() => {
+                  const section = document.getElementById(page.toLowerCase());
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+
+          {/* RIGHT-SIDE BUTTONS + PROFILE (Desktop only) */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
+            
+            <Button variant="outlined" sx={{ color: "black", borderColor: "black" }}>
+              Sign In
+            </Button>
+
+            <Button variant="contained" sx={{ backgroundColor: "black" }}>
+              Book Consultation
+            </Button>
+
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+
+            {/* User Profile Menu */}
+            <Menu
+              anchorEl={anchorElUser}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+}
+
+export default ResponsiveAppBar;
