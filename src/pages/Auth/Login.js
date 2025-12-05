@@ -18,8 +18,9 @@ import {
     - open: boolean to show/hide dialog
     - onClose: function to close dialog
     - onLogin: callback called with form data after successful login (mock)
+    - onOpenRegister: callback to toggle to register modal
 */
-export default function Login({ open, onClose, onLogin }) {
+export default function Login({ open, onClose, onLogin, onOpenRegister }) {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,10 +47,7 @@ export default function Login({ open, onClose, onLogin }) {
 
     setLoading(true);
     try {
-      // mock API delay
       await new Promise((r) => setTimeout(r, 600));
-
-      // on successful login notify parent
       if (onLogin) onLogin(form);
       onClose();
     } catch (err) {
@@ -61,109 +59,126 @@ export default function Login({ open, onClose, onLogin }) {
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-      <DialogTitle sx={{ textAlign: "center" }}>
-        {/* Text label: Dialog title */}
+      <DialogTitle
+        sx={{
+          textAlign: "center",
+          bgcolor: "#f5f5f5",
+          color: "#333",
+          fontWeight: 700,
+          py: 2,
+          borderBottom: "1px solid #ddd",
+        }}
+      >
         <Typography variant="h6">User Login</Typography>
       </DialogTitle>
 
-      <DialogContent>
+      <DialogContent sx={{ px: 4, py: 3 }}>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <Grid container spacing={2}>
-            {/* Left side: login form */}
+          <Grid container spacing={3}>
+            {/* LEFT SIDE — Login form */}
             <Grid item xs={12} md={6}>
-              {/* Text label: Section heading */}
-              <Typography variant="subtitle1" gutterBottom>
-                {/* Text label: form subtitle */}
+              <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: "bold", fontSize: "1.05rem", mb: 2 }}>
                 Sign in to your account
               </Typography>
 
-              {/* Field: Email input */}
               <TextField
-                label="Email"                // comment: Email field label
-                name="email"                 // comment: Email field name (for state)
-                type="email"                 // comment: Email input type
+                label="Email"
+                name="email"
+                type="email"
                 value={form.email}
                 onChange={handleChange}
-                required                     // comment: required flag
+                required
                 fullWidth
                 margin="normal"
+                sx={{ "& .MuiInputBase-root": { borderRadius: 2 } }}
               />
 
-              {/* Field: Password input */}
               <TextField
-                label="Password"             // comment: Password field label
-                name="password"              // comment: Password field name (for state)
-                type="password"              // comment: Password input type
+                label="Password"
+                name="password"
+                type="password"
                 value={form.password}
                 onChange={handleChange}
-                required                     // comment: required flag
+                required
                 fullWidth
                 margin="normal"
+                sx={{ "& .MuiInputBase-root": { borderRadius: 2 } }}
               />
 
-              {/* Button: primary login submit */}
-              <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+              <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
                 <Button
-                  type="submit"             // comment: submit button (logs in)
+                  type="submit"
                   variant="contained"
                   onClick={handleSubmit}
                   disabled={loading}
+                  sx={{ px: 3, py: 1, textTransform: "none", fontWeight: "bold", minWidth: 120 }}
                 >
                   {loading ? "Signing in..." : "Sign In"}
                 </Button>
 
-                {/* Button: cancel/close */}
                 <Button
                   variant="outlined"
-                  onClick={onClose}         // comment: close button (closes dialog)
+                  onClick={onClose}
                   disabled={loading}
+                  sx={{ textTransform: "none", fontWeight: "bold", minWidth: 120 }}
                 >
                   Cancel
                 </Button>
               </Box>
 
-              {/* Button: Google login (visual placeholder only) */}
               <Box sx={{ mt: 2 }}>
                 <Button
                   variant="outlined"
                   fullWidth
-                  onClick={() => {
-                    // comment: Google sign-in placeholder (replace with real OAuth)
-                    console.log("Google sign-in clicked");
-                  }}
-                  startIcon={<Avatar sx={{ width: 24, height: 24 }}>G</Avatar>}
+                  startIcon={<Avatar sx={{ width: 26, height: 26 }}>G</Avatar>}
+                  onClick={() => console.log("Google sign-in clicked")}
+                  sx={{ textTransform: "none", fontWeight: 600, py: 1.2, borderRadius: 2 }}
                 >
-                  {/* Text label: Google login button */}
                   Continue with Google
                 </Button>
               </Box>
 
-              {/* Optional inline error message */}
+              <Box sx={{ mt: 3, mb: 1, display: "flex", alignItems: "center" }}>
+                <Box sx={{ flexGrow: 1, height: 1, bgcolor: "grey.300" }} />
+                <Typography sx={{ mx: 2, color: "text.secondary", fontSize: "0.85rem" }}>or</Typography>
+                <Box sx={{ flexGrow: 1, height: 1, bgcolor: "grey.300" }} />
+              </Box>
+
+              <Button
+                fullWidth
+                variant="text"
+                onClick={() => {
+                  onClose?.();
+                  onOpenRegister?.();
+                }}
+                sx={{ textTransform: "none", fontWeight: "bold", py: 1, color: "black" }}
+              >
+                Create an Account
+              </Button>
+
               {error && (
-                <Typography color="error" variant="body2" sx={{ mt: 1 }}>
-                  {/* Text label: error message */}
+                <Typography color="error" variant="body2" sx={{ mt: 1, fontWeight: 600 }}>
                   {error}
                 </Typography>
               )}
             </Grid>
 
-            {/* Right side: picture / illustration placeholder */}
+            {/* RIGHT SIDE — Illustration */}
             <Grid item xs={12} md={6}>
               <Box
                 sx={{
                   height: "100%",
-                  minHeight: 220,
-                  borderRadius: 1,
+                  minHeight: 240,
+                  borderRadius: 3,
                   bgcolor: "grey.100",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  p: 2
+                  p: 2,
+                  border: "1px dashed #ccc",
                 }}
               >
-                {/* Text label: image placeholder */}
-                <Typography color="text.secondary">
-                  {/* Text label: replace this with an <img> or illustration */}
+                <Typography color="text.secondary" sx={{ fontStyle: "italic" }}>
                   Picture / Illustration
                 </Typography>
               </Box>
@@ -173,7 +188,6 @@ export default function Login({ open, onClose, onLogin }) {
       </DialogContent>
 
       <DialogActions>
-        {/* Button: close footer (duplicate close, optional) */}
         <Button onClick={onClose} disabled={loading}>
           Close
         </Button>
