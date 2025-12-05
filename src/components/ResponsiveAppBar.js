@@ -14,7 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar({ isUserLoggedIn }) {
+// CHANGED: added onSignInClick prop so parent can open the Login dialog
+function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -81,9 +82,18 @@ function ResponsiveAppBar({ isUserLoggedIn }) {
                 </MenuItem>
               ))}
 
-              {/* Sign In button (inside menu) */}
+              {/* Sign In button (inside menu)
+                  CHANGED: call handleCloseNavMenu then onSignInClick from parent to open Login dialog */}
               <MenuItem>
-                <Button fullWidth variant="outlined" sx={{ color: "black", borderColor: "black" }}>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  sx={{ color: "black", borderColor: "black" }}
+                  onClick={() => {
+                    handleCloseNavMenu();        // close the mobile menu first
+                    onSignInClick?.();           // notify parent to open Login dialog
+                  }}
+                >
                   Sign In
                 </Button>
               </MenuItem>
@@ -139,7 +149,12 @@ function ResponsiveAppBar({ isUserLoggedIn }) {
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
             
             {!isUserLoggedIn && (
-            <Button variant="outlined" sx={{ color: "black", borderColor: "black" }}>
+            // CHANGED: desktop Sign In now calls onSignInClick to open Login dialog
+            <Button
+              variant="outlined"
+              sx={{ color: "black", borderColor: "black" }}
+              onClick={() => onSignInClick?.()}
+            >
               Sign In
             </Button> )}
 
