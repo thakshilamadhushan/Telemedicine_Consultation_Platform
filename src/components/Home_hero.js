@@ -6,7 +6,7 @@ const icons = importAll(require.context("../assets/icons/Hero", false, /\.(png|j
 
 export default function HomeSection() {
   return (
-    <Box id="home" sx={{ width: "90%", mt: 15, px: { xs: 2, md: 6 } }}>
+    <Box id="home" sx={{ width: "90%", mt: 15, px: { xs: 2, md: 6 } }} mx="auto">
 
       {/* TOP HERO SECTION */}
       <Grid
@@ -118,10 +118,9 @@ export default function HomeSection() {
           width: "80%",
           mx: "auto",
           justifyContent: "center",
-          alignItems: "center",
         }}
       >
-        <Grid container spacing={{ xs: 5, sm: 8, md: 15, lg: 30 }} justifyContent="center" alignItems="center" textAlign="center">
+        <Grid container spacing={{ xs: 5, sm: 8, md: 15, lg: 30 }} justifyContent="center" alignItems="center" textAlign="center" mx="auto">
 
           {/* Stat 1 */}
           <Grid item xs={12} sm={6} md={3}>

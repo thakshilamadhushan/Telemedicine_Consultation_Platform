@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ isUserLoggedIn }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -44,7 +44,6 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 20,
               display: { xs: 'none', md: 'flex' },
@@ -139,17 +138,19 @@ function ResponsiveAppBar() {
           {/* RIGHT-SIDE BUTTONS + PROFILE (Desktop only) */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
             
+            {!isUserLoggedIn && (
             <Button variant="outlined" sx={{ color: "black", borderColor: "black" }}>
               Sign In
-            </Button>
+            </Button> )}
 
             <Button variant="contained" sx={{ backgroundColor: "black" }}>
               Book Consultation
             </Button>
 
+            {isUserLoggedIn && (
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt="User" src="/static/images/avatar/2.jpg" />
-            </IconButton>
+            </IconButton> )}
 
             {/* User Profile Menu */}
             <Menu

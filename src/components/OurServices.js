@@ -74,7 +74,7 @@ export default function OurServicesSection() {
   ];
 
   return (
-    <Box id="services" sx={{ mt: 5, px: { xs: 2, md: 4 } }}>
+    <Box id="services" sx={{ mt: 5, px: { xs: 2, md: 4 } }} mx="auto">
       {/* Title Section */}
       <Grid item xs={12} textAlign="center" p={4}>
         <Box
