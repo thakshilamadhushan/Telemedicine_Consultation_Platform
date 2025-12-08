@@ -10,13 +10,13 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from "react-router-dom";
 
 const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 function ResponsiveAppBar({ isUserLoggedIn }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -25,14 +25,12 @@ function ResponsiveAppBar({ isUserLoggedIn }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  
+  const navigate = useNavigate();
+  const handleOpenUserDashboard = () => {
+    navigate("/profile");
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", boxShadow: 1 }}>
@@ -148,26 +146,10 @@ function ResponsiveAppBar({ isUserLoggedIn }) {
             </Button>
 
             {isUserLoggedIn && (
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
               <Avatar alt="User" src="/static/images/avatar/2.jpg" />
             </IconButton> )}
-
-            {/* User Profile Menu */}
-            <Menu
-              anchorEl={anchorElUser}
-              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
-
         </Toolbar>
       </Container>
     </AppBar>
