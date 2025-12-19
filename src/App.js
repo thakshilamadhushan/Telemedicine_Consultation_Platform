@@ -4,10 +4,10 @@ import PublicHome from "./pages/Home/PublicHome";
 import UserHome from "./pages/Home/UserHome";
 import UserProfile from "./pages/UserProfile/userProfile";
 import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
-import VideoCall from "./pages/VideoCall/patientVideoCallUI";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import BookConsultation_Home from "./pages/BookConsultation/BookConsultation_Home";
-import Consultation_select from "./pages/BookConsultation/Consultation_select";
+import PatientVideoCall from "./pages/VideoCall/patientVideoCallUI";
+import DoctorVideoCall from "./pages/VideoCall/doctorVidoCallUi";
+=========
+>>>>>>>>> Temporary merge branch 2
 
 function App() {
   return (
@@ -17,10 +17,10 @@ function App() {
         <Route path="/home" element={<UserHome />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/doctor" element={<DoctorProfile/>}/>
-        <Route path="/videocall" element={<VideoCall/>}/>
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/book-consultation" element={<BookConsultation_Home />} />
-        <Route path="/consult-selection" element={<Consultation_select />} />
+        <Route path="/patientvideocall" element={<PatientVideoCall/>}/>
+        <Route path="/doctorvideocall" element={<DoctorVideoCall/>}/>
+=========
+>>>>>>>>> Temporary merge branch 2
       </Routes>
     </BrowserRouter>
   );

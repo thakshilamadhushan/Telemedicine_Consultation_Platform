@@ -7,14 +7,6 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import ChatIcon from "@mui/icons-material/Chat";
 import CallEndIcon from "@mui/icons-material/CallEnd";
-import ScreenShareIcon from "@mui/icons-material/ScreenShare";
-import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
-import SettingsIcon from "@mui/icons-material/Settings";
-import CloseIcon from "@mui/icons-material/Close";
-import SendIcon from "@mui/icons-material/Send";
-import DrMichael from "../../assets/VideoCall/Dr.Michael_Chen.jpg";
-
-const SIDE_PANEL_WIDTH = 350;
 
 export default function VideoCallUI() {
   const videoRef = useRef(null);
@@ -22,14 +14,6 @@ export default function VideoCallUI() {
   const [videoOn, setVideoOn] = useState(true);
   const [micOn, setMicOn] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
-  const [screenOn, setScreenOn] = useState(false);
-  const [screenStream, setScreenStream] = useState(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const hasWelcomedRef = useRef(false);
-  
 
   useEffect(() => {
   let localStream;
@@ -83,129 +67,6 @@ const turnVideoOff = () => {
     stream.getAudioTracks().forEach((t) => (t.enabled = !micOn));
     setMicOn(!micOn);
   };
-
-  const [seconds, setSeconds] = React.useState(0);
-
-React.useEffect(() => {
-  const interval = setInterval(() => {
-    setSeconds((prev) => prev + 1);
-  }, 1000);
-
-  return () => clearInterval(interval);
-}, []);
-
-useEffect(() => {
-  if (chatOpen && !hasWelcomedRef.current) {
-    setMessages((prev) => [
-      ...prev,
-      {
-        text: "Hello! I can see you now. How are you feeling today?",
-        sender: "doctor",
-        time: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      },
-    ]);
-
-    hasWelcomedRef.current = true;
-  }
-}, [chatOpen]);
-
-
-const formatTime = (secs) => {
-  const mins = String(Math.floor(secs / 60)).padStart(2, "0");
-  const secsLeft = String(secs % 60).padStart(2, "0");
-  return `${mins}:${secsLeft}`;
-};
-
-const toggleScreenShare = async () => {
-  // STOP screen sharing
-  if (screenOn && screenStream) {
-    screenStream.getTracks().forEach(track => track.stop());
-    setScreenStream(null);
-    setScreenOn(false);
-
-    // restore camera
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-    }
-    return;
-  }
-
-  // START screen sharing
-  try {
-    const displayStream = await navigator.mediaDevices.getDisplayMedia({
-      video: true,
-      audio: false,
-    });
-
-    setScreenStream(displayStream);
-    setScreenOn(true);
-
-    if (videoRef.current) {
-      videoRef.current.srcObject = displayStream;
-    }
-
-    // auto stop when user clicks "Stop sharing"
-    displayStream.getVideoTracks()[0].onended = () => {
-      setScreenOn(false);
-      setScreenStream(null);
-      if (videoRef.current && stream) {
-        videoRef.current.srcObject = stream;
-      }
-    };
-  } catch (err) {
-    console.error("Screen share cancelled", err);
-  }
-};
-
-const endCall = () => {
-  // Stop camera & microphone
-  if (stream) {
-    stream.getTracks().forEach(track => track.stop());
-    setStream(null);
-  }
-
-  // Stop screen sharing if active
-  if (screenStream) {
-    screenStream.getTracks().forEach(track => track.stop());
-    setScreenStream(null);
-    setScreenOn(false);
-  }
-
-  // Reset video & mic states
-  setVideoOn(false);
-  setMicOn(false);
-
-  // Optional: Close chat & settings
-  setChatOpen(false);
-  setSettingsOpen(false);
-
-
-  // Optional: You can navigate to another page or show "Call ended" UI
-  console.log("Call ended");
-};
-
-const sendMessage = () => {
-  if (!message.trim()) return;
-
-  setMessages((prev) => [
-    ...prev,
-    {
-      text: message,
-      sender: "you",
-      time: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    },
-  ]);
-
-  setMessage("");
-};
-
-
 
   return (
     <Box sx={{ height: "100vh", display: "flex", bgcolor: "#0f1c2e" }}>
@@ -381,181 +242,22 @@ const sendMessage = () => {
 
       {/* CHAT DRAWER */}
       <Drawer
-          variant="persistent"
-          anchor="right"
-          open={chatOpen}
-          PaperProps={{
-            sx: {
-              width: SIDE_PANEL_WIDTH,
-              bgcolor: "#142338",
-              color: "white",
-              position: "fixed",
-              right: 0,
-              top: 0,
-            },
-          }}
-        >
-          <Box
-            sx={{
-              p: 2,
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {/* HEADER */}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                mb: 2,
-              }}
-            >
-              <Typography variant="h6">Chat</Typography>
-              <IconButton onClick={() => setChatOpen(false)} sx={{ color: "white" }}>
-                <CloseIcon />
-              </IconButton>
-            </Box>
-
-            {/* CHAT MESSAGES */}
-            <Box
-              sx={{
-                flex: 1,
-                overflowY: "auto",
-                mb: 2,
-                pr: 1,
-              }}
-            >
-              {messages.map((msg, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    mb: 1.5,
-                    display: "flex",
-                    justifyContent: msg.sender === "you" ? "flex-end" : "flex-start",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      maxWidth: "75%",
-                      px: 1.5,
-                      py: 1,
-                      borderRadius: 2,
-                      bgcolor:
-                        msg.sender === "you"
-                          ? "#1976d2"
-                          : "rgba(255,255,255,0.15)",
-                    }}
-                  >
-                    <Typography fontSize={14}>{msg.text}</Typography>
-                    <Typography fontSize={10} color="rgba(255,255,255,0.7)" align="right">
-                      {msg.time}
-                    </Typography>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-
-            {/* INPUT + SEND */}
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <TextField
-                fullWidth
-                placeholder="Type a message..."
-                variant="outlined"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                InputProps={{
-                  sx: {
-                    bgcolor: "white",
-                    borderRadius: 2,
-                  },
-                }}
-              />
-
-              <IconButton
-                onClick={sendMessage}
-                disabled={!message.trim()}
-                sx={{
-                  bgcolor: "#1976d2",
-                  color: "white",
-                  "&:hover": {
-                    bgcolor: "#1565c0",
-                  },
-                  width: 48,
-                  height: 48,
-                  borderRadius: "50%",
-                }}
-              >
-                <SendIcon />
-              </IconButton>
-            </Box>
-          </Box>
-        </Drawer>
-
-
-
-
-      {/* SETTINGS DRAWER */}
-      <Drawer
-          variant="persistent"
-          anchor="right"
-          open={settingsOpen}
-          PaperProps={{
-            sx: {
-              width: SIDE_PANEL_WIDTH,
-              bgcolor: "#142338",
-              color: "white",
-              position: "fixed",
-              right: 0,
-              top: 0,
-            },
-          }}
-        >
-          <Box sx={{ p: 2 }}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                mb: 2,
-              }}
-            >
-              <Typography variant="h6">Settings</Typography>
-              <IconButton
-                onClick={() => setSettingsOpen(false)}
-                sx={{ color: "white" }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Box>
-
-            <Stack spacing={2}>
-              <Box>
-                <Typography variant="subtitle2">Camera</Typography>
-                <Typography variant="body2" color="gray">
-                  Default Camera
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography variant="subtitle2">Microphone</Typography>
-                <Typography variant="body2" color="gray">
-                  Default Microphone
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography variant="subtitle2">Speaker</Typography>
-                <Typography variant="body2" color="gray">
-                  Default Speaker
-                </Typography>
-              </Box>
-            </Stack>
-          </Box>
-        </Drawer>
-
+        anchor="right"
+        open={chatOpen}
+        onClose={() => setChatOpen(false)}
+        PaperProps={{ sx: { width: 350, bgcolor: "#142338", color: "white" } }}
+      >
+        <Box sx={{ p: 2, height: "100%", display: "flex", flexDirection: "column" }}>
+          <Typography variant="h6" mb={2}>Chat</Typography>
+          <Box sx={{ flex: 1 }} />
+          <TextField
+            fullWidth
+            placeholder="Type a message..."
+            variant="outlined"
+            InputProps={{ sx: { bgcolor: "white", borderRadius: 2 } }}
+          />
+        </Box>
+      </Drawer>
     </Box>
   );
 }
