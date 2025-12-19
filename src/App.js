@@ -4,7 +4,7 @@ import PublicHome from "./pages/Home/PublicHome";
 import UserHome from "./pages/Home/UserHome";
 import UserProfile from "./pages/UserProfile/userProfile";
 import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
-import AboutUs from "./pages/AboutUs/AboutUs";
+import VideoCall from "./pages/VideoCall/patientVideoCallUI";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route path="/home" element={<UserHome />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/doctor" element={<DoctorProfile/>}/>
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/videocall" element={<VideoCall/>}/>
       </Routes>
     </BrowserRouter>
   );

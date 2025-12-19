@@ -84,7 +84,7 @@ export default function UserProfile() {
             display: "flex",
             justifyContent: "center",
             height: 40,
-            width: { xs: "100%", md: "50%" },
+            width: { xs: "100%", md: "60%" },
             mx: "auto",
           }}>
             <Tabs

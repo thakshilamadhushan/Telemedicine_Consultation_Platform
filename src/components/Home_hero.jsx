@@ -116,7 +116,7 @@ export default function HomeSection({ onSignInClick }) {
           mt: 8,
           p: 4,
           borderRadius: 4,
-          width: "80%",
+          width: "85%",
           mx: "auto",
           justifyContent: "center",
         }}

@@ -105,7 +105,7 @@ export default function Overview() {
         border: "1px solid #c0c0c0ff",
         p: 3,
         borderRadius: 4,
-        width: "50%",
+        width: "40%",
         mx: "auto"
       }}
     >
