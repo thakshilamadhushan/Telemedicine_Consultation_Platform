@@ -164,7 +164,7 @@ const handlebookConsultation = () => {
             </Button> )}
 
             {!isDoctorLoggedIn && (
-            <Button variant="contained" sx={{ backgroundColor: "black" }}>
+            <Button variant="contained" sx={{ backgroundColor: "black" }} onClick={() => {handlebookConsultation();}}>
               Book Consultation
             </Button> 
           )}
