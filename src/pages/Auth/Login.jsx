@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import loginImage from "../../assets/login_picture.png"; //importing side picture
 import {
   Dialog,
   DialogTitle,
@@ -58,7 +59,13 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth={false} PaperProps={{ sx: {
+                                                                                          width: {
+                                                                                            xs: "95%",
+                                                                                            sm: "85%",
+                                                                                            md: "900px",
+                                                                                            lg: "860px", // width of the dialog box
+                                                                                          }, }}}>
       <DialogTitle
         sx={{
           textAlign: "center",
@@ -165,24 +172,27 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
 
             {/* RIGHT SIDE — Illustration */}
             <Grid item xs={12} md={6}>
-              <Box
-                sx={{
-                  height: "100%",
-                  minHeight: 240,
-                  borderRadius: 3,
-                  bgcolor: "grey.100",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 2,
-                  border: "1px dashed #ccc",
-                }}
-              >
-                <Typography color="text.secondary" sx={{ fontStyle: "italic" }}>
-                  Picture / Illustration
-                </Typography>
-              </Box>
-            </Grid>
+                <Box
+                       sx={{
+                       height: "100%",
+                        minHeight: 320,
+                       borderRadius: 3,
+                       overflow: "hidden", // IMPORTANT
+                       border: "1px dashed #ccc", }}
+                     >
+                  <Box
+                    component="img"
+                    src={loginImage}
+                    alt="Login Illustration"
+                    sx={{
+                      width: "100%",
+                      maxWidth: 320,
+                      height: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Box>
+              </Grid>
           </Grid>
         </Box>
       </DialogContent>

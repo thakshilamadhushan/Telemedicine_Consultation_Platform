@@ -12,6 +12,7 @@ import StopScreenShareIcon from "@mui/icons-material/StopScreenShare";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
+import SessionFeedbackDialog from "../Feedback/feedback";
 import DrMichael from "../../assets/VideoCall/Dr.Michael_Chen.jpg";
 
 const SIDE_PANEL_WIDTH = 350;
@@ -29,7 +30,7 @@ export default function VideoCallUI() {
   const [messages, setMessages] = useState([]);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const hasWelcomedRef = useRef(false);
-  
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   useEffect(() => {
   let localStream;
@@ -182,6 +183,8 @@ const endCall = () => {
   setChatOpen(false);
   setSettingsOpen(false);
 
+  // Open feedback popup
+  setFeedbackOpen(true);
 
   // Optional: You can navigate to another page or show "Call ended" UI
   console.log("Call ended");
@@ -556,6 +559,10 @@ const sendMessage = () => {
           </Box>
         </Drawer>
 
+        <SessionFeedbackDialog
+          open={feedbackOpen}
+          onClose={() => setFeedbackOpen(false)}
+        />
     </Box>
   );
 }
