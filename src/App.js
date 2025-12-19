@@ -7,6 +7,7 @@ import UserProfile from "./pages/UserProfile/userProfile";
 import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
 import PatientVideoCall from "./pages/VideoCall/patientVideoCallUI";
 import DoctorVideoCall from "./pages/VideoCall/doctorVidoCallUi";
+import BookConsultationHome from './pages/BookConsultation/Consultation_select';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/doctor" element={<DoctorProfile />} />
         <Route path="/patientvideocall" element={<PatientVideoCall/>}/>
         <Route path="/doctorvideocall" element={<DoctorVideoCall/>}/>
+        <Route path="/bookconsultation" element={<BookConsultationHome/>}/>
       </Routes>
     </BrowserRouter>
   );

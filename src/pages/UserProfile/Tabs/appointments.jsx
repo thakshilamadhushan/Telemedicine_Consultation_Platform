@@ -3,6 +3,10 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import DrMichael from "../../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
+import DrEmily from "../../../assets/DoctorsImages/Dr.Emily_Rodriguez.jpg";
+import DrJames from "../../../assets/DoctorsImages/Dr.James_Wilson.jpg";
+
 
 const appointments = [
   {
@@ -11,7 +15,7 @@ const appointments = [
     date: "Dec 15, 2025",
     time: "10:00 AM",
     location: "Video Call",
-    doctorImage: "/assets/doc1.jpg",
+    doctorImage: DrMichael,
   },
   {
     doctorName: "Dr. Emily Rodriguez",
@@ -19,7 +23,7 @@ const appointments = [
     date: "Dec 20, 2025",
     time: "2:30 PM",
     location: "Medical Center - Floor 3",
-    doctorImage: "/assets/doc2.jpg",
+    doctorImage: DrEmily,
   },
   {
     doctorName: "Dr. James Wilson",
@@ -27,7 +31,7 @@ const appointments = [
     date: "Nov 05, 2025",
     time: "11:00 AM",
     location: "Video Call",
-    doctorImage: "/assets/doc3.jpg",
+    doctorImage: DrJames,
   }
 ];
 
@@ -134,7 +138,7 @@ export default function Appointments() {
         >
           {/* ROW: Doctor Image + Info */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Avatar src={app.photo || "/assets/doc1.jpg"} sx={{ width: 80, height: 80 }}/>
+            <Avatar src={app.doctorImage} sx={{ width: 80, height: 80 }}/>
 
             <Box sx={{ flex: 1}} >
               <Box sx={{flex: 1}} alignItems="center" display="flex" gap={1}>

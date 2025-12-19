@@ -12,13 +12,14 @@ import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import StarIcon from "@mui/icons-material/Star";
+import DrMichael from "../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
 
 export default function DoctorProfile() {
   const [tab, setTab] = React.useState(0);
 
   return (
     <>
-      <Navbar isUserLoggedIn={true}/>
+      <Navbar isDoctorLoggedIn={true}/>
 
       <Box sx={{ width: "90%", mt: 12, px: { xs: 2, md: 6 } }} justifyContent="center" mx="auto">
         
@@ -40,7 +41,7 @@ export default function DoctorProfile() {
         >
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <Avatar
-              src="/assets/user.jpg"
+              src={DrMichael}
               sx={{ width: 130, height: 130 }}
             />
             <Stack spacing={1.4} sx={{ p: 1 }}>

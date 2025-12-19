@@ -10,6 +10,7 @@ import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import user from "../../assets/UserImages/Emily_chen.jpg";
 
 
 export default function UserProfile() {
@@ -39,7 +40,7 @@ export default function UserProfile() {
         >
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <Avatar
-              src="/assets/user.jpg"
+              src={user}
               sx={{ width: 130, height: 130 }}
             />
             <Stack spacing={1.2} sx={{ p: 1 }}>

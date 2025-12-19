@@ -11,6 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
+import User from "../assets/UserImages/Emily_chen.jpg"
+import Doctor from "../assets/DoctorsImages/Dr.Michael_Chen.jpg"
 
 const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
 
@@ -29,9 +31,14 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
   
   const navigate = useNavigate();
   const handleOpenUserDashboard = () => {
+    if (isDoctorLoggedIn) navigate("/doctor");
+    else
     navigate("/user");
   };
 
+const handlebookConsultation = () => {
+  navigate("/bookconsultation");
+}
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", boxShadow: 1 }}>
@@ -98,7 +105,7 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
 
               {/* Book Consultation button (inside menu) */}
               <MenuItem>
-                <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }}>
+                <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }} onClick={() => {handlebookConsultation();}}>
                   Book Consultation
                 </Button>
               </MenuItem>
@@ -146,7 +153,7 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
           {/* RIGHT-SIDE BUTTONS + PROFILE (Desktop only) */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
             
-            {!isUserLoggedIn && (
+            {isDoctorLoggedIn || !isUserLoggedIn && (
             // CHANGED: desktop Sign In now calls onSignInClick to open Login dialog
             <Button
               variant="outlined"
@@ -164,7 +171,12 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
 
             {isUserLoggedIn && (
             <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
-              <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+              <Avatar alt="User" src={User} />
+            </IconButton> )}
+
+            {isDoctorLoggedIn && (
+            <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
+              <Avatar alt="User" src={Doctor} />
             </IconButton> )}
           </Box>
         </Toolbar>
