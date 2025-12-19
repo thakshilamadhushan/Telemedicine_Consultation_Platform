@@ -32,6 +32,16 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
     navigate("/profile");
   };
 
+  const handlePageClick = (page) => {
+    if (page === 'About Us') {
+      navigate('/about-us');
+    } else {
+      const section = document.getElementById(page.toLowerCase().replace(' ', ''));
+      section?.scrollIntoView({ behavior: "smooth" });
+    }
+    handleCloseNavMenu();
+  };
+
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "white", boxShadow: 1 }}>
@@ -75,7 +85,7 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
             >
               {/* Navigation pages */}
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handlePageClick(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -133,10 +143,7 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 4 }}>
             {pages.map((page) => (
               <Button key={page} sx={{ my: 2, color: "black" }}
-                onClick={() => {
-                  const section = document.getElementById(page.toLowerCase());
-                  section?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => handlePageClick(page)}
               >
                 {page}
               </Button>
