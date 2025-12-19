@@ -1,17 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../../assets/login_picture.png"; //importing side picture
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button,
-  Box,
-  Grid,
-  Typography,
-  Avatar
-} from "@mui/material";
+import {Dialog,DialogTitle,DialogContent,DialogActions,TextField,Button,Box,Grid,Typography,Avatar} from "@mui/material";
 
 /*
   Login modal component (MUI Dialog).
@@ -21,7 +11,19 @@ import {
     - onLogin: callback called with form data after successful login (mock)
     - onOpenRegister: callback to toggle to register modal
 */
+
+const MOCK_USER = {
+  email: "user@example.com",
+  password: "1234",
+};
+
+const MOCK_DOCTOR = {
+  email: "doctor@example.com",
+  password: "abcd",
+}
+
 export default function Login({ open, onClose, onLogin, onOpenRegister }) {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,6 +42,7 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
   const handleSubmit = async (e) => {
     e?.preventDefault();
     setError("");
+
     const v = validate();
     if (v) {
       setError(v);
@@ -47,16 +50,38 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
     }
 
     setLoading(true);
+
     try {
-      await new Promise((r) => setTimeout(r, 600));
-      if (onLogin) onLogin(form);
-      onClose();
+      await new Promise((r) => setTimeout(r, 600)); // fake API delay
+
+      // ✅ CHECK EMAIL & PASSWORD
+      if (
+        form.email === MOCK_USER.email &&
+        form.password === MOCK_USER.password
+      ) {
+        // SUCCESS LOGIN
+        if (onLogin) onLogin(form); // pass user data
+        onClose();
+        navigate("/home");
+      } else if (
+        form.email === MOCK_DOCTOR.email &&
+        form.password === MOCK_DOCTOR.password
+      ) {
+        // SUCCESS LOGIN FOR DOCTOR
+        if (onLogin) onLogin(form); // pass doctor data
+        onClose();
+        navigate("/doctorhome");
+      } else {
+        // ❌ WRONG CREDENTIALS
+        setError("Invalid email or password.");
+      }
     } catch (err) {
       setError("Login failed. Try again.");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth={false} PaperProps={{ sx: {

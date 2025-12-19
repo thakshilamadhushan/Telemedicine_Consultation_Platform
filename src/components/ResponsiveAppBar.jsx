@@ -16,7 +16,7 @@ const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
 
 
 // CHANGED: added onSignInClick prop so parent can open the Login dialog
-function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
+function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -29,7 +29,7 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
   
   const navigate = useNavigate();
   const handleOpenUserDashboard = () => {
-    navigate("/profile");
+    navigate("/user");
   };
 
 
@@ -156,11 +156,13 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
               Sign In
             </Button> )}
 
+            {!isDoctorLoggedIn && (
             <Button variant="contained" sx={{ backgroundColor: "black" }}>
               Book Consultation
-            </Button>
+            </Button> 
+          )}
 
-            {isUserLoggedIn && (
+            {isDoctorLoggedIn  && (
             <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
               <Avatar alt="User" src="/static/images/avatar/2.jpg" />
             </IconButton> )}
