@@ -3,16 +3,17 @@ import { Box, Tabs, Tab, Avatar, Button, Typography, Paper, Stack } from "@mui/m
 import Navbar from "../../components/ResponsiveAppBar";
 import Footer from "../../components/Footer";
 import Appointments from "./Tabs/appointments";
-import MedicalInfo from "./Tabs/medicalInfo";
+import Credentials from "./Tabs/credentials";
+import Reviews from "./Tabs/reviews";
 import Settings from "./Tabs/settings";
 import Overview from "./Tabs/overview";
 import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import StarIcon from "@mui/icons-material/Star";
 
-
-export default function UserProfile() {
+export default function DoctorProfile() {
   const [tab, setTab] = React.useState(0);
 
   return (
@@ -42,9 +43,10 @@ export default function UserProfile() {
               src="/assets/user.jpg"
               sx={{ width: 130, height: 130 }}
             />
-            <Stack spacing={1.2} sx={{ p: 1 }}>
-              <Box display={"flex"} alignItems="center" gap={1}>
-                  <Typography variant="h6" >Sarah Johnson</Typography>
+            <Stack spacing={1.4} sx={{ p: 1 }}>
+            <Box>
+              <Box display={"flex"} alignItems="center" gap={1} >
+                  <Typography variant="h6" >Dr. Michael Chen</Typography>
                   <Box
                       sx={{
                       px: 1,
@@ -58,10 +60,13 @@ export default function UserProfile() {
                   >
                       {"Verified"}
                   </Box>
+                </Box>
+                <Typography variant="body2" color="gray">Cardiologist & Cardiovascular Specialist</Typography>
               </Box>
-              <Typography variant="body2" color="gray">Patient ID: PT-2023-0456</Typography>
-              <Typography variant="body2">sarah.johnson@email.com</Typography>
-              <Typography variant="body2">Yakkala, Sri Lanka</Typography>
+              
+              <Typography variant="body2">License No: CA-MD-123456</Typography>
+              <Typography variant="body2">dr.chen@sfcardio.com</Typography>
+              <Typography variant="body2">Colombo, Sri Lanka</Typography>
             </Stack>
           </Box>
 
@@ -70,7 +75,7 @@ export default function UserProfile() {
               <Button variant="contained">Edit Profile</Button>
               <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }}>Log Out</Button>
             </Box>
-            <Button variant="outlined">Download Medical Records</Button>
+            <Button variant="outlined" >View Shedule</Button>
           </Box>
         </Paper>
 
@@ -84,7 +89,7 @@ export default function UserProfile() {
             display: "flex",
             justifyContent: "center",
             height: 40,
-            width: { xs: "100%", md: "60%" },
+            width: { xs: "100%", md: "70%" },
             mx: "auto",
           }}>
             <Tabs
@@ -147,7 +152,30 @@ export default function UserProfile() {
                   }}
                   icon={<InfoIcon />}
                   iconPosition="start"
-                  label="Medical Info" />
+                  label="Credentials" />
+            
+              <Tab
+                  sx={{
+                    textTransform: "none",
+                    fontWeight: 600,
+                    minWidth: 180,
+                    minHeight: 0,
+                    px: 2,
+                    borderRadius: 10,
+                    color: "#000",
+                    height: 40,
+
+                    display: "flex",
+                    alignItems: "center",
+
+                    "&.Mui-selected": {
+                      backgroundColor: "#fff",
+                      color: "#000",
+                    },
+                  }}
+                  icon={<StarIcon />}
+                  iconPosition="start"
+                  label="Reviews" />
 
               <Tab 
                   sx={{
@@ -199,9 +227,10 @@ export default function UserProfile() {
 
         <Box sx={{ mt: 4 }}>
           {tab === 0 && <Appointments />}
-          {tab === 1 && <MedicalInfo />}
-          {tab === 2 && <Settings />}
-          {tab === 3 && <Overview />}
+          {tab === 1 && <Credentials />}
+          {tab === 2 && <Reviews />}
+          {tab === 3 && <Settings />}
+          {tab === 4 && <Overview />}
         </Box>
       </Box>
 

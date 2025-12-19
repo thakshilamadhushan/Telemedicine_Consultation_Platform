@@ -18,7 +18,7 @@ export default function OurServicesSection() {
     },
     {
       title: "General Consultation",
-      description: "Connect With Experienced Physicians For Common Health Concerns. Get Quick Medical Advice, Prescriptions, And Follow-Up Care Without Leaving Your Home ensuring fast, reliable healthcare access.",
+      description: "Connect With Experienced Physicians For Common Health Concerns. Get Quick Medical Advice, Prescriptions, And Follow-Up Care Without Leaving Your Home ensuring fast, reliable healthcare access. Schedule virtual consultations at your convenience and receive expert care anytime, anywhere.",
       image: images[2],
       icon: icons[5],
       features: [
@@ -111,7 +111,7 @@ export default function OurServicesSection() {
             elevation={4}
             sx={{
               display: "flex",
-              maxWidth: 700, 
+              maxWidth: 600, 
               width: "100%",
               flexDirection: { xs: "column", sm: "row" },
               borderRadius: 4,

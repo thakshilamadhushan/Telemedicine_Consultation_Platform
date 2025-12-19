@@ -53,7 +53,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 500,
+                    width: 400,
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -89,7 +89,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 500,
+                    width: 400,
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -125,7 +125,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 500,
+                    width: 400,
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
