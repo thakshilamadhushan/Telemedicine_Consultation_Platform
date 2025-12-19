@@ -5,6 +5,7 @@ import UserHome from "./pages/Home/UserHome";
 import UserProfile from "./pages/UserProfile/userProfile";
 import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
 import VideoCall from "./pages/VideoCall/patientVideoCallUI";
+import AboutUs from "./pages/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/user" element={<UserProfile />} />
         <Route path="/doctor" element={<DoctorProfile/>}/>
         <Route path="/videocall" element={<VideoCall/>}/>
+        <Route path="/about-us" element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   );

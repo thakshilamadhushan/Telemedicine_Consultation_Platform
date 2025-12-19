@@ -55,23 +55,7 @@ export default function AboutUs() {
       <Container sx={{ mt: 8, mb: 8 }}>
         {/* Our Mission & Vision Section */}
         <Grid container spacing={6} alignItems="center">
-          <Grid item xs={12} md={6}>
-            {/* IMAGE PLACING CODE BLOCK */}
-            <Box 
-              sx={{ 
-                width: '100%', 
-                height: 400, 
-                bgcolor: '#e0e0e0', 
-                borderRadius: 4,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Typography color="textSecondary">Insert Team Image or Hospital Photo Here</Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <Typography variant="h4" fontWeight="bold" gutterBottom>
               Our Mission
             </Typography>
@@ -114,25 +98,23 @@ export default function AboutUs() {
         <Typography variant="h4" textAlign="center" fontWeight="bold" gutterBottom>
           Our Core Values
         </Typography>
-        <Grid container spacing={4} sx={{ mt: 2 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, mt: 2 }}>
           {[
             { title: "Integrity", desc: "We uphold the highest medical ethics and transparency.", icon: <SecurityIcon fontSize="large" color="primary" /> },
             { title: "Accessibility", desc: "Healthcare should be available to everyone, regardless of location.", icon: <GroupsIcon fontSize="large" color="primary" /> },
             { title: "Innovation", desc: "Using cutting-edge tech to improve patient experiences.", icon: <LocalHospitalIcon fontSize="large" color="primary" /> },
           ].map((value, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Paper variant="outlined" sx={{ p: 4, textAlign: 'center', height: '100%', borderRadius: 3 }}>
-                <Box sx={{ mb: 2 }}>{value.icon}</Box>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>{value.title}</Typography>
-                <Typography variant="body2" color="textSecondary">{value.desc}</Typography>
-              </Paper>
-            </Grid>
+            <Paper key={index} variant="outlined" sx={{ p: 4, textAlign: 'center', height: '100%', borderRadius: 3 }}>
+              <Box sx={{ mb: 2 }}>{value.icon}</Box>
+              <Typography variant="h6" fontWeight="bold" gutterBottom>{value.title}</Typography>
+              <Typography variant="body2" color="textSecondary">{value.desc}</Typography>
+            </Paper>
           ))}
-        </Grid>
+        </Box>
       </Container>
 
       {/* Call to Action Footer Section */}
-      <Box sx={{ bgcolor: '#1976d2', color: 'white', py: 8, textAlign: 'center' }}>
+      <Box sx={{ bgcolor: '#1976d2', color: 'white', py: 9, textAlign: 'center' }}>
         <Container>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             Ready to get started?
