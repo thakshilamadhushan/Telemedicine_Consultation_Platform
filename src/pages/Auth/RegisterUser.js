@@ -8,7 +8,6 @@ import {
   Button,
   Box,
   Alert,
-  Grid,
   Typography,
   MenuItem,
   Stepper,
@@ -79,121 +78,105 @@ function getStepContent(step, form, handleChange) {
           <Typography variant="h6" gutterBottom startIcon={<PersonIcon />}>
             Personal Information
           </Typography>
-          <Grid container spacing={3}>
-            {/* Row 1: First Name and Last Name (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="First Name"
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Last Name"
-                name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
+            {/* Row 1: First Name and Last Name */}
+            <TextField
+              required
+              label="First Name"
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              required
+              label="Last Name"
+              name="lastName"
+              value={form.lastName}
+              onChange={handleChange}
+              fullWidth
+            />
             
-            {/* Row 2: Date of Birth and Gender (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Date of Birth"
-                name="dateOfBirth"
-                type="date"
-                value={form.dateOfBirth}
-                onChange={handleChange}
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                select
-                label="Gender"
-                name="gender"
-                value={form.gender}
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value="">Select Gender</MenuItem>
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="other">Other</MenuItem>
-              </TextField>
-            </Grid>
+            {/* Row 2: Date of Birth and Gender */}
+            <TextField
+              required
+              label="Date of Birth"
+              name="dateOfBirth"
+              type="date"
+              value={form.dateOfBirth}
+              onChange={handleChange}
+              fullWidth
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              required
+              select
+              label="Gender"
+              name="gender"
+              value={form.gender}
+              onChange={handleChange}
+              fullWidth
+            >
+              <MenuItem value="">Select Gender</MenuItem>
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </TextField>
 
-            {/* Row 3: Blood Type and Email Address (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                select
-                label="Blood Type"
-                name="bloodType"
-                value={form.bloodType}
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value="">Select Blood Type</MenuItem>
-                <MenuItem value="A+">A+</MenuItem>
-                <MenuItem value="A-">A-</MenuItem>
-                <MenuItem value="B+">B+</MenuItem>
-                <MenuItem value="B-">B-</MenuItem>
-                <MenuItem value="AB+">AB+</MenuItem>
-                <MenuItem value="AB-">AB-</MenuItem>
-                <MenuItem value="O+">O+</MenuItem>
-                <MenuItem value="O-">O-</MenuItem>
-              </TextField>
-            </Grid>
+            {/* Row 3: Blood Type and Email Address */}
+            <TextField
+              required
+              select
+              label="Blood Type"
+              name="bloodType"
+              value={form.bloodType}
+              onChange={handleChange}
+              fullWidth
+            >
+              <MenuItem value="">Select Blood Type</MenuItem>
+              <MenuItem value="A+">A+</MenuItem>
+              <MenuItem value="A-">A-</MenuItem>
+              <MenuItem value="B+">B+</MenuItem>
+              <MenuItem value="B-">B-</MenuItem>
+              <MenuItem value="AB+">AB+</MenuItem>
+              <MenuItem value="AB-">AB-</MenuItem>
+              <MenuItem value="O+">O+</MenuItem>
+              <MenuItem value="O-">O-</MenuItem>
+            </TextField>
 
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Email Address"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
+            <TextField
+              required
+              label="Email Address"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              fullWidth
+            />
             
-            {/* Row 4: Phone Numbers (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Phone Number"
-                name="phone"
-                type="tel"
-                value={form.phone}
-                onChange={handleChange}
-                fullWidth
-                placeholder="+94 7x xxx xxxx"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Alternate Phone Number"
-                name="alternatePhone"
-                type="tel"
-                value={form.alternatePhone}
-                onChange={handleChange}
-                fullWidth
-                placeholder="+94 7x xxx xxxx"
-              />
-            </Grid>
+            {/* Row 4: Phone Numbers */}
+            <TextField
+              required
+              label="Phone Number"
+              name="phone"
+              type="tel"
+              value={form.phone}
+              onChange={handleChange}
+              fullWidth
+              placeholder="+94 7x xxx xxxx"
+            />
+            <TextField
+              label="Alternate Phone Number"
+              name="alternatePhone"
+              type="tel"
+              value={form.alternatePhone}
+              onChange={handleChange}
+              fullWidth
+              placeholder="+94 7x xxx xxxx"
+            />
             
-            {/* Row 5: Street Address (Full Width - xs={12}) */}
-            <Grid item xs={12}>
+            {/* Row 5: Street Address (Full Width) */}
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 required
                 label="Street Address"
@@ -203,30 +186,26 @@ function getStepContent(step, form, handleChange) {
                 fullWidth
                 placeholder="123 Main Street, Yakkala, Gampaha"
               />
-            </Grid>
+            </Box>
             
-            {/* Row 6: City and State (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="City"
-                name="city"
-                value={form.city}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="State"
-                name="state"
-                value={form.state}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-          </Grid>
+            {/* Row 6: City and State */}
+            <TextField
+              required
+              label="City"
+              name="city"
+              value={form.city}
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              required
+              label="State"
+              name="state"
+              value={form.state}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Box>
         </Box>
       );
     case 1: // Step 2: Medical Information
@@ -235,31 +214,27 @@ function getStepContent(step, form, handleChange) {
           <Typography variant="h6" gutterBottom startIcon={<FavoriteBorderIcon />}>
             Medical Information
           </Typography>
-          <Grid container spacing={3}>
-            {/* Row 1: Height and Weight (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Height"
-                name="height"
-                value={form.height}
-                onChange={handleChange}
-                fullWidth
-                placeholder="5'8'' or 173 cm"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Weight"
-                name="weight"
-                value={form.weight}
-                onChange={handleChange}
-                fullWidth
-                placeholder="150 lbs or 68 kg"
-              />
-            </Grid>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
+            {/* Row 1: Height and Weight */}
+            <TextField
+              label="Height"
+              name="height"
+              value={form.height}
+              onChange={handleChange}
+              fullWidth
+              placeholder="5'8'' or 173 cm"
+            />
+            <TextField
+              label="Weight"
+              name="weight"
+              value={form.weight}
+              onChange={handleChange}
+              fullWidth
+              placeholder="150 lbs or 68 kg"
+            />
             
-            {/* Subsequent rows are full width (xs={12}) */}
-            <Grid item xs={12}>
+            {/* Subsequent rows are full width */}
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 label="Allergies"
                 name="allergies"
@@ -269,8 +244,8 @@ function getStepContent(step, form, handleChange) {
                 placeholder="e.g. penicillin, peanuts"
                 helperText="List any known allergies"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 label="Chronic Conditions"
                 name="chronicConditions"
@@ -280,8 +255,8 @@ function getStepContent(step, form, handleChange) {
                 placeholder="e.g. diabetes, hypertension"
                 helperText="List any chronic conditions"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 label="Current Medications"
                 name="currentMedications"
@@ -291,8 +266,8 @@ function getStepContent(step, form, handleChange) {
                 placeholder="e.g. lisinopril 10mg"
                 helperText="List current medications and dosages"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 label="Past Surgeries"
                 name="pastSurgeries"
@@ -303,8 +278,8 @@ function getStepContent(step, form, handleChange) {
                 multiline
                 rows={2}
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Box>
+            <Box sx={{ gridColumn: '1 / -1' }}>
               <TextField
                 label="Family Medical History"
                 name="familyMedicalHistory"
@@ -315,8 +290,8 @@ function getStepContent(step, form, handleChange) {
                 multiline
                 rows={2}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Box>
       );
     case 2: // Step 3: Emergency & Lifestyle Information
@@ -326,122 +301,106 @@ function getStepContent(step, form, handleChange) {
           <Typography variant="h6" gutterBottom startIcon={<ContactMailIcon />}>
             Emergency Contact
           </Typography>
-          <Grid container spacing={3}>
-            {/* Row 1: Full Name and Relationship (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Full Name"
-                name="emergencyContactName"
-                value={form.emergencyContactName}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Relationship"
-                name="emergencyContactRelationship"
-                value={form.emergencyContactRelationship}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
+            {/* Row 1: Full Name and Relationship */}
+            <TextField
+              required
+              label="Full Name"
+              name="emergencyContactName"
+              value={form.emergencyContactName}
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              required
+              label="Relationship"
+              name="emergencyContactRelationship"
+              value={form.emergencyContactRelationship}
+              onChange={handleChange}
+              fullWidth
+            />
             
-            {/* Row 2: Phone and Email (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                label="Phone Number"
-                name="emergencyContactPhone"
-                type="tel"
-                value={form.emergencyContactPhone}
-                onChange={handleChange}
-                fullWidth
-                placeholder="+94 7x xxx xxxx"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Email Address"
-                name="emergencyContactEmail"
-                type="email"
-                value={form.emergencyContactEmail}
-                onChange={handleChange}
-                fullWidth
-                placeholder="email@example.com"
-              />
-            </Grid>
-          </Grid>
+            {/* Row 2: Phone and Email */}
+            <TextField
+              required
+              label="Phone Number"
+              name="emergencyContactPhone"
+              type="tel"
+              value={form.emergencyContactPhone}
+              onChange={handleChange}
+              fullWidth
+              placeholder="+94 7x xxx xxxx"
+            />
+            <TextField
+              label="Email Address"
+              name="emergencyContactEmail"
+              type="email"
+              value={form.emergencyContactEmail}
+              onChange={handleChange}
+              fullWidth
+              placeholder="email@example.com"
+            />
+          </Box>
 
           {/* Lifestyle Information Section */}
           <Typography variant="h6" gutterBottom sx={{ mt: 4, mb: 2 }}>
             Lifestyle Information
           </Typography>
-          <Grid container spacing={3}>
-            {/* Row 3: Smoking and Alcohol (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                select
-                label="Smoking Status"
-                name="smokingStatus"
-                value={form.smokingStatus}
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value="">Select status</MenuItem>
-                <MenuItem value="never">Never Smoked</MenuItem>
-                <MenuItem value="current">Current Smoker</MenuItem>
-                <MenuItem value="former">Former Smoker</MenuItem>
-              </TextField>
-            </Grid>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
+            {/* Row 3: Smoking and Alcohol */}
+            <TextField
+              select
+              label="Smoking Status"
+              name="smokingStatus"
+              value={form.smokingStatus}
+              onChange={handleChange}
+              fullWidth
+            >
+              <MenuItem value="">Select status</MenuItem>
+              <MenuItem value="never">Never Smoked</MenuItem>
+              <MenuItem value="current">Current Smoker</MenuItem>
+              <MenuItem value="former">Former Smoker</MenuItem>
+            </TextField>
 
-            <Grid item xs={12} sm={6}>
-              <TextField
-                select
-                label="Alcohol Consumption"
-                name="alcoholConsumption"
-                value={form.alcoholConsumption}
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value="">Select frequency</MenuItem>
-                <MenuItem value="never">Never</MenuItem>
-                <MenuItem value="rarely">Rarely</MenuItem>
-                <MenuItem value="socially">Socially/Occasionally</MenuItem>
-                <MenuItem value="regularly">Regularly</MenuItem>
-              </TextField>
-            </Grid>
+            <TextField
+              select
+              label="Alcohol Consumption"
+              name="alcoholConsumption"
+              value={form.alcoholConsumption}
+              onChange={handleChange}
+              fullWidth
+            >
+              <MenuItem value="">Select frequency</MenuItem>
+              <MenuItem value="never">Never</MenuItem>
+              <MenuItem value="rarely">Rarely</MenuItem>
+              <MenuItem value="socially">Socially/Occasionally</MenuItem>
+              <MenuItem value="regularly">Regularly</MenuItem>
+            </TextField>
             
-            {/* Row 4: Exercise and Diet (sm={6}) */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                select
-                label="Exercise Frequency"
-                name="exerciseFrequency"
-                value={form.exerciseFrequency}
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value="">Select frequency</MenuItem>
-                <MenuItem value="daily">Daily</MenuItem>
-                <MenuItem value="3-4week">3-4 Times/Week</MenuItem>
-                <MenuItem value="1-2week">1-2 Times/Week</MenuItem>
-                <MenuItem value="rarely">Rarely/Never</MenuItem>
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Dietary Restrictions"
-                name="dietaryRestrictions"
-                value={form.dietaryRestrictions}
-                onChange={handleChange}
-                fullWidth
-                placeholder="E.G. Vegetarian, Gluten-Free"
-              />
-            </Grid>
-          </Grid>
+            {/* Row 4: Exercise and Diet */}
+            <TextField
+              select
+              label="Exercise Frequency"
+              name="exerciseFrequency"
+              value={form.exerciseFrequency}
+              onChange={handleChange}
+              fullWidth
+            >
+              <MenuItem value="">Select frequency</MenuItem>
+              <MenuItem value="daily">Daily</MenuItem>
+              <MenuItem value="3-4week">3-4 Times/Week</MenuItem>
+              <MenuItem value="1-2week">1-2 Times/Week</MenuItem>
+              <MenuItem value="rarely">Rarely/Never</MenuItem>
+            </TextField>
+            <TextField
+              label="Dietary Restrictions"
+              name="dietaryRestrictions"
+              value={form.dietaryRestrictions}
+              onChange={handleChange}
+              fullWidth
+              placeholder="E.G. Vegetarian, Gluten-Free"
+            />
+          </Box>
 
           {/* Important Information / Acknowledgement Section */}
           <Box sx={{ mt: 4, p: 2, bgcolor: "info.main", color: "white", borderRadius: 2 }}>
@@ -463,7 +422,7 @@ function getStepContent(step, form, handleChange) {
             }
             label={
               <Typography sx={{ fontWeight: "bold" }}>
-                I Acknowledge That The Information Provided Is Accurate And Complete To The Best Of My Knowledge. I Consent To The Use Of This Information For Medical Treatment And Care Coordination.
+              I Acknowledge That The Information Provided Is Accurate And Complete To The Best Of My Knowledge. I Consent To The Use Of This Information For Medical Treatment And Care Coordination.
               </Typography>
             }
             sx={{ mt: 2 }}

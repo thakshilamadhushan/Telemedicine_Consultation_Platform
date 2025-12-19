@@ -4,7 +4,7 @@ const importAll = (context) => context.keys().map(context);
 const icons = importAll(require.context("../assets/icons/Hero", false, /\.(png|jpe?g|svg)$/));
 
 
-export default function HomeSection() {
+export default function HomeSection({ onSignInClick }) {
   return (
     <Box id="home" sx={{ width: "90%", mt: 15, px: { xs: 2, md: 6 } }} mx="auto">
 
@@ -82,6 +82,7 @@ export default function HomeSection() {
           <Stack direction="row" spacing={2}>
             <Button
               variant="contained"
+              onClick={onSignInClick}
               sx={{
                 background: "linear-gradient(to right, #009dff, #005bbb)",
                 px: 3,
