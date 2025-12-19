@@ -15,7 +15,7 @@ const Section = ({ icon, title, children }) => (
       p: 3,
       mb: 3,
       borderRadius: 3,
-      height: "100%",
+      height: "fit-content",
       border: "1px solid #c0c0c0ff",
     }}>
     <Stack direction="row" spacing={1.5} alignItems="center">
@@ -49,7 +49,8 @@ const ToggleRow = ({ title, subtitle }) => (
 
 export default function SettingsPage() {
   return (
-      <Box gap={2} display={{md:"flex"}} justifyContent={"center"} mx={"auto"}>
+    <Box gap={2} display={{md:"flex"}} justifyContent={"center"} mx={"auto"}>
+      <Box>
         {/* Availability */}
           <Section
             icon={<EventAvailableIcon />}
@@ -66,8 +67,8 @@ export default function SettingsPage() {
               title="In-Person Visits"
               subtitle="Enable in-person appointments"
             />
-            <Typography pt={2} minWidth={180}>Default Consultation Duration</Typography>
-            <Stack direction="row" alignItems="center" spacing={2} mt={2}>
+            <Typography pt={1} minWidth={180}>Default Consultation Duration</Typography>
+            <Stack direction="row" alignItems="center" spacing={2} mt={1}>
               <AccessTimeIcon color="action" />
               <TextField
                 size="small"
@@ -79,8 +80,36 @@ export default function SettingsPage() {
             </Stack>
           </Section>
 
+          {/* Fees */}
+          <Section icon={<PaymentsIcon />} title="Consultation Fees">
+            <Stack spacing={2} pt={3}>
+              <TextField
+                label="Video Consultation Fee (Rs.)"
+                defaultValue={1500}
+                fullWidth
+                sx={{ minWidth: 350, }}
+              />
+              <TextField
+                label="In-Person Visit Fee (Rs.)"
+                defaultValue={2000}
+                fullWidth
+                sx={{ minWidth: 350 }}
+              />
+              <TextField
+                label="Follow-Up Consultation Fee (Rs.)"
+                defaultValue={1000}
+                fullWidth
+                sx={{ minWidth: 350 }}
+              />
+              <Button variant="contained" size="large">
+                Update Fees
+              </Button>
+            </Stack>
+          </Section>
+        </Box>
+
+        <Box>
         {/* Notifications */}
-        
           <Section
             icon={<NotificationsIcon />}
             title="Notification Preferences">
@@ -101,41 +130,11 @@ export default function SettingsPage() {
               subtitle="Alert when patients leave reviews"
             />
           </Section>
+      
         
-
-        {/* Fees */}
-        
-          <Section icon={<PaymentsIcon />} title="Consultation Fees">
-            <Stack spacing={2}>
-              <TextField
-                label="Video Consultation Fee (Rs.)"
-                defaultValue={1500}
-                fullWidth
-                sx={{ minWidth: 350 }}
-              />
-              <TextField
-                label="In-Person Visit Fee (Rs.)"
-                defaultValue={2000}
-                fullWidth
-                sx={{ minWidth: 350 }}
-              />
-              <TextField
-                label="Follow-Up Consultation Fee (Rs.)"
-                defaultValue={1000}
-                fullWidth
-                sx={{ minWidth: 350 }}
-              />
-              <Button variant="contained" size="large">
-                Update Fees
-              </Button>
-            </Stack>
-          </Section>
-        
-
         {/* Security */}
-        
           <Section icon={<SecurityIcon />} title="Security & Privacy">
-            <Stack spacing={2}>
+            <Stack spacing={2} mt={3}>
               <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
                 <Stack direction="row" justifyContent="space-between">
                   <Stack direction="row" spacing={1.5} alignItems="center" mr={3}>
@@ -184,6 +183,7 @@ export default function SettingsPage() {
               </Paper>
             </Stack>
           </Section>
-       </Box>
+        </Box>
+    </Box>
   );
 }

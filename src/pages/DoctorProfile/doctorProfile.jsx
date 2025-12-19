@@ -89,7 +89,7 @@ export default function DoctorProfile() {
             display: "flex",
             justifyContent: "center",
             height: 40,
-            width: { xs: "100%", md: "60%" },
+            width: { xs: "100%", md: "70%" },
             mx: "auto",
           }}>
             <Tabs

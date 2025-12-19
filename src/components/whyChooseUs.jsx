@@ -34,7 +34,7 @@ export default function whychooseusSection() {
         {/* CARDS */}
         <Grid 
         container 
-        spacing={{ xs: 2, sm: 3, md: 5 }} 
+        spacing={{ xs: 2, sm: 3, md: 2 }} 
         justifyContent="center"
         alignItems="center"
         >
@@ -47,7 +47,7 @@ export default function whychooseusSection() {
                 borderRadius: 4,
                 textAlign: "left",
                 width: "100%",
-                maxWidth: 280, 
+                maxWidth: 250, 
                 transition: "transform 0.3s, box-shadow 0.3s",
                 "&:hover": {
                 transform: "translateY(-10px)", // lift card
@@ -88,7 +88,7 @@ export default function whychooseusSection() {
                 borderRadius: 4, 
                 textAlign: "left", 
                 width: "100%", 
-                maxWidth: 280,
+                maxWidth: 250,
                 transition: "transform 0.3s, box-shadow 0.3s",
                 "&:hover": {
                 transform: "translateY(-10px)", // lift card
@@ -127,7 +127,7 @@ export default function whychooseusSection() {
                 borderRadius: 4, 
                 textAlign: "left", 
                 width: "100%", 
-                maxWidth: 280,
+                maxWidth: 250,
                 transition: "transform 0.3s, box-shadow 0.3s",
                 "&:hover": {
                 transform: "translateY(-10px)", // lift card
@@ -166,7 +166,7 @@ export default function whychooseusSection() {
                 borderRadius: 4, 
                 textAlign: "left", 
                 width: "100%", 
-                maxWidth: 280,
+                maxWidth: 250,
                 transition: "transform 0.3s, box-shadow 0.3s",
                 "&:hover": {
                 transform: "translateY(-10px)", // lift card

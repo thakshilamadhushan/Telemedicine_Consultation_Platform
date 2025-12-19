@@ -77,12 +77,14 @@ const areasOfSpecialization = [
 
 export default function Overview() {
   return (
-    <Box display="flex" mx="auto" gap={2}>
+  <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4 }} justifyContent={"center"} mx={"auto"}>
+    <Box>
     <Paper
       elevation={0}
       sx={{
         border: "1px solid #c0c0c0ff",
         p: 3,
+        mb: 4,
         borderRadius: 4,
         width: "auto",
         mx: "auto"
@@ -144,81 +146,6 @@ export default function Overview() {
                   gap={1}
                 >
                   <CalendarMonthIcon /> {edu.period}
-                </Typography>
-              </Box>
-            </Box>
-          </Paper>
-        );
-      })}
-    </Paper>
-
-    {/* Certifications & Awards */}
-    <Paper
-      elevation={0}
-      sx={{
-        border: "1px solid #c0c0c0ff",
-        p: 3,
-        borderRadius: 4,
-        width: "auto",
-        mx: "auto"
-      }}
-    >
-      <Typography variant="h6" sx={{ mb: 2 }} display={"flex"} gap={1}>
-        <img src={icons[2]} alt="" width="25" height="25"/>
-        Certifications & Awards
-      </Typography>
-
-      {certificationAndAwards.map((ceaw, index) => {
-        return (
-          <Paper
-            key={index}
-            elevation={0}
-            sx={{
-              p: 2,
-              mb: 2,
-              borderRadius: 3,
-              border: "1px solid #d1d1d1",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Box
-                  sx={{
-                    width: 55,
-                    height: 55,
-                    backgroundColor: "#fffd8eff",
-                    borderRadius: 2,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  
-                  <img
-                    src={icons[3]}
-                    alt=" "
-                    style={{ width: 40, height: 40 }}
-                  />
-                </Box >
-
-              <Box sx={{ flex: 1 }}>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Typography sx={{ fontWeight: 600 }}>
-                    {ceaw.Name}
-                  </Typography>
-                </Box>
-
-                <Typography variant="body2" color="gray">
-                  {ceaw.university}
-                </Typography>
-
-                <Typography
-                  variant="body2"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                >
-                  <CalendarMonthIcon /> {ceaw.period}
                 </Typography>
               </Box>
             </Box>
@@ -301,6 +228,86 @@ export default function Overview() {
         );
       })}
     </Paper>
+    </Box>
+
+    <Box>
+    {/* Certifications & Awards */}
+    <Paper
+      elevation={0}
+      sx={{
+        border: "1px solid #c0c0c0ff",
+        p: 3,
+        mb: 4,
+        borderRadius: 4,
+        width: "auto",
+        mx: "auto"
+      }}
+    >
+      <Typography variant="h6" sx={{ mb: 2 }} display={"flex"} gap={1}>
+        <img src={icons[2]} alt="" width="25" height="25"/>
+        Certifications & Awards
+      </Typography>
+
+      {certificationAndAwards.map((ceaw, index) => {
+        return (
+          <Paper
+            key={index}
+            elevation={0}
+            sx={{
+              p: 2,
+              mb: 2,
+              borderRadius: 3,
+              border: "1px solid #d1d1d1",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Box
+                  sx={{
+                    width: 55,
+                    height: 55,
+                    backgroundColor: "#fffd8eff",
+                    borderRadius: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  
+                  <img
+                    src={icons[3]}
+                    alt=" "
+                    style={{ width: 40, height: 40 }}
+                  />
+                </Box >
+
+              <Box sx={{ flex: 1 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Typography sx={{ fontWeight: 600 }}>
+                    {ceaw.Name}
+                  </Typography>
+                </Box>
+
+                <Typography variant="body2" color="gray">
+                  {ceaw.university}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                >
+                  <CalendarMonthIcon /> {ceaw.period}
+                </Typography>
+              </Box>
+            </Box>
+          </Paper>
+        );
+      })}
+    </Paper>
+
+    
 
     {/* Areas Of Specialization */}
     <Paper
@@ -335,6 +342,7 @@ export default function Overview() {
         );
       })}
     </Paper>
+   </Box>
    </Box>
   );
 }
