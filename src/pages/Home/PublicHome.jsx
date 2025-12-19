@@ -36,7 +36,7 @@ export default function PublicHome() {
         </Box>
       </Container>
 
-      <HomeSection />
+      <HomeSection onSignInClick={() => setOpenLogin(true)} />
       <WhyChooseUs />
       <OurServices />
       <Feedbacks />

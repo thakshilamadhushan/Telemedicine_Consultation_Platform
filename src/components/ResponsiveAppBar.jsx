@@ -162,7 +162,7 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
             </Button> 
           )}
 
-            {isDoctorLoggedIn  && (
+            { isUserLoggedIn && (
             <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
               <Avatar alt="User" src="/static/images/avatar/2.jpg" />
             </IconButton> )}

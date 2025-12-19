@@ -205,11 +205,10 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
                        overflow: "hidden", // IMPORTANT
                        border: "1px dashed #ccc", }}
                      >
-                  <Box
-                    component="img"
+                  <img
                     src={loginImage}
                     alt="Login Illustration"
-                    sx={{
+                    style={{
                       width: "100%",
                       maxWidth: 320,
                       height: "auto",
