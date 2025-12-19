@@ -32,6 +32,10 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
     navigate("/profile");
   };
 
+  const handleBookConsultation = () => {
+    navigate("/book-consultation");
+  };
+
   const handlePageClick = (page) => {
     if (page === 'About Us') {
       navigate('/about-us');
@@ -108,7 +112,7 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
 
               {/* Book Consultation button (inside menu) */}
               <MenuItem>
-                <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }}>
+                <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }} onClick={handleBookConsultation}>
                   Book Consultation
                 </Button>
               </MenuItem>
@@ -163,7 +167,7 @@ function ResponsiveAppBar({ isUserLoggedIn, onSignInClick }) {
               Sign In
             </Button> )}
 
-            <Button variant="contained" sx={{ backgroundColor: "black" }}>
+            <Button variant="contained" sx={{ backgroundColor: "black" }} onClick={handleBookConsultation}>
               Book Consultation
             </Button>
 

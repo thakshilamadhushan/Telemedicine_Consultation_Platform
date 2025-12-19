@@ -8,23 +8,32 @@ import {
   Card, 
   CardActionArea, 
   InputAdornment, 
-  Container 
+  Container,
+  IconButton
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import FaceIcon from '@mui/icons-material/Face';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import BuildIcon from '@mui/icons-material/Build';
+import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import { useNavigate } from 'react-router-dom';
 
 const BookConsultationHome = () => {
   const navigate = useNavigate();
   // 1. Data Array for all doctor types
   const specialties = [
-    { id: 1, name: 'Cardiologist' },
-    { id: 2, name: 'General Practitioner' },
-    { id: 3, name: 'Dermatologist' },
-    { id: 4, name: 'Pediatrician' },
-    { id: 5, name: 'Neurologist' },
-    { id: 6, name: 'Psychiatrist' },
-    { id: 7, name: 'Orthopedic' },
-    { id: 8, name: 'Gynecologist' },
+    { id: 1, name: 'Cardiologist', icon: <FavoriteIcon sx={{ fontSize: 60, color: '#e91e63' }} /> },
+    { id: 2, name: 'General Practitioner', icon: <LocalHospitalIcon sx={{ fontSize: 60, color: '#2196f3' }} /> },
+    { id: 3, name: 'Dermatologist', icon: <FaceIcon sx={{ fontSize: 60, color: '#ff9800' }} /> },
+    { id: 4, name: 'Pediatrician', icon: <ChildCareIcon sx={{ fontSize: 60, color: '#4caf50' }} /> },
+    { id: 5, name: 'Neurologist', icon: <PsychologyIcon sx={{ fontSize: 60, color: '#9c27b0' }} /> },
+    { id: 6, name: 'Psychiatrist', icon: <PsychologyIcon sx={{ fontSize: 60, color: '#607d8b' }} /> },
+    { id: 7, name: 'Orthopedic', icon: <BuildIcon sx={{ fontSize: 60, color: '#795548' }} /> },
+    { id: 8, name: 'Gynecologist', icon: <PregnantWomanIcon sx={{ fontSize: 60, color: '#e91e63' }} /> },
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -108,31 +117,10 @@ const BookConsultationHome = () => {
           >
             <CardActionArea sx={{ p: 4, textAlign: 'center', height: '100%' }} onClick={() => navigate('/consult-selection', { state: { specialty: specialty.name } })}>
               
-              {/* ========================================== */}
-              {/* START: IMAGE PLACING CODE BLOCK           */}
-              {/* ========================================== */}
-              {/* Note: Replace the Box below with your imported image.
-                  Example: <img src={myIcon} alt={specialty.name} style={{ width: 80 }} /> 
-              */}
-              <Box 
-                sx={{ 
-                  width: 100, 
-                  height: 100, 
-                  margin: '0 auto 16px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  backgroundColor: '#f0f0f0', // Placeholder background
-                  borderRadius: '8px'
-                }}
-              >
-                <Typography variant="caption" color="textSecondary">
-                  Image Here
-                </Typography>
+              {/* Icon */}
+              <Box sx={{ margin: '0 auto 16px' }}>
+                {specialty.icon}
               </Box>
-              {/* ========================================== */}
-              {/* END: IMAGE PLACING CODE BLOCK             */}
-              {/* ========================================== */}
 
               <Typography 
                 variant="h6" 
@@ -140,6 +128,15 @@ const BookConsultationHome = () => {
               >
                 {specialty.name}
               </Typography>
+              <IconButton 
+                sx={{ mt: 1, color: '#1976d2' }}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent CardActionArea click
+                  navigate('/consult-selection', { state: { specialty: specialty.name } });
+                }}
+              >
+                <ArrowForwardIcon />
+              </IconButton>
             </CardActionArea>
           </Card>
         ))}

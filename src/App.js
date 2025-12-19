@@ -6,6 +6,8 @@ import UserProfile from "./pages/UserProfile/userProfile";
 import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
 import VideoCall from "./pages/VideoCall/patientVideoCallUI";
 import AboutUs from "./pages/AboutUs/AboutUs";
+import BookConsultation_Home from "./pages/BookConsultation/BookConsultation_Home";
+import Consultation_select from "./pages/BookConsultation/Consultation_select";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/doctor" element={<DoctorProfile/>}/>
         <Route path="/videocall" element={<VideoCall/>}/>
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/book-consultation" element={<BookConsultation_Home />} />
+        <Route path="/consult-selection" element={<Consultation_select />} />
       </Routes>
     </BrowserRouter>
   );
