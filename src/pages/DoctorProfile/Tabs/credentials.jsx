@@ -97,7 +97,6 @@ export default function Overview() {
 
       {education.map((edu, index) => {
         return (
-
           <Paper
             key={index}
             elevation={0}
