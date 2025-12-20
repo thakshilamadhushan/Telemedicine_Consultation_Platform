@@ -37,7 +37,8 @@ function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
   };
 
 const handlebookConsultation = () => {
-  navigate("/bookconsultation");
+  if (isUserLoggedIn) navigate("/bookconsultation");
+  else onSignInClick?.();
 }
 
   return (
