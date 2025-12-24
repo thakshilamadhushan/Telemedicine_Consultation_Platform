@@ -17,6 +17,7 @@ const timeSlots = [
 export default function ChooseTime() {
   const [consultationType, setConsultationType] = useState("video");
   const [selectedSlot, setSelectedSlot] = useState(null);
+   const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
 
   return (
@@ -119,6 +120,8 @@ export default function ChooseTime() {
             </Typography>
             <input
               type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
               style={{
                 width: "95%",
                 padding: "12px",
@@ -160,7 +163,7 @@ export default function ChooseTime() {
                   fullWidth
                   size="large"
                   variant="contained"
-                  disabled={!selectedSlot}
+                  disabled={!selectedSlot || !selectedDate}
                   onClick={() => {
                     navigate("/consultationselect_3");
                   }}
@@ -172,7 +175,6 @@ export default function ChooseTime() {
           </CardContent>
         </Card>
       </Box>
-
       <Footer />
     </Box>
   );

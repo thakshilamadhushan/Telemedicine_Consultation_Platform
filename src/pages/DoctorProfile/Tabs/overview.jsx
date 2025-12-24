@@ -1,4 +1,3 @@
-import React from "react";
 import {Box,Grid,Paper,Typography,Chip,Stack,Divider} from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -28,57 +27,67 @@ const StatCard = ({ icon, value, label, bg }) => (
 
 export default function Overview() {
   return (
-    <Box display={"flex"} gap={3} justifyContent={"center"} mx={"auto"}>
-      <Box >
+    <Grid container spacing={3} justifyContent="center" sx={{ px: { xs: 2, md: 5 }, py: 3 }}>
+      {/* LEFT COLUMN */}
+      <Grid item xs={12} md={8} container direction="column" spacing={3}>
         {/* TODAY OVERVIEW */}
-        <Paper elevation={0} sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff", mb: 3}}>
-          <Typography variant="h6" mb={2}>
-            Today&apos;s Overview
-          </Typography>
-          <Box spacing={3} display={"flex"} gap={3} p={3}>
-            <Grid item xs={6} md={3}>
-              <StatCard
-                icon={<CalendarMonthIcon color="primary" />}
-                value="8"
-                label="Today's Appointments"
-                bg="#e6ebff"
-              />
+        <Grid item>
+          <Paper
+            elevation={0}
+            sx={{ p: 2, borderRadius: 4, border: "1px solid #c0c0c0ff" }}
+          >
+            <Typography variant="h6" mb={2}>
+              Today's Overview
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={3}>
+                <StatCard
+                  icon={<CalendarMonthIcon color="primary" />}
+                  value="8"
+                  label="Today's Appointments"
+                  bg="#e6ebff"
+                />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <StatCard
+                  icon={<GroupsIcon sx={{ color: "green" }} />}
+                  value="5248"
+                  label="Total Patients"
+                  bg="#e9ffe8"
+                />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <StatCard
+                  icon={<StarIcon sx={{ color: "#f5a623" }} />}
+                  value="4.9"
+                  label="Average Rating"
+                  bg="#fff3d6"
+                />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <StatCard
+                  icon={<TrendingUpIcon sx={{ color: "purple" }} />}
+                  value="98%"
+                  label="Completion Rate"
+                  bg="#f3e5ff"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={6} md={3}>
-              <StatCard
-                icon={<GroupsIcon sx={{ color: "green" }} />}
-                value="5248"
-                label="Total Patients"
-                bg="#e9ffe8"
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <StatCard
-                icon={<StarIcon sx={{ color: "#f5a623" }} />}
-                value="4.9"
-                label="Average Rating"
-                bg="#fff3d6"
-              />
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <StatCard
-                icon={<TrendingUpIcon sx={{ color: "purple" }} />}
-                value="98%"
-                label="Completion Rate"
-                bg="#f3e5ff"
-              />
-            </Grid>
-          </Box>
-        </Paper>
+          </Paper>
+        </Grid>
 
         {/* PERFORMANCE METRICS */}
-        <Paper elevation={0} sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff", mb: 3}}>
-          <Typography variant="h6" mb={2}>
-            Performance Metrics
-          </Typography>
-          <Stack spacing={2}>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Box
+        <Grid item>
+          <Paper
+            elevation={0}
+            sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff" }}
+          >
+            <Typography variant="h6" mb={2}>
+              Performance Metrics
+            </Typography>
+            <Stack spacing={2}>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Box
                   sx={{
                     width: 55,
                     height: 55,
@@ -90,14 +99,15 @@ export default function Overview() {
                   }}
                 >
                   <CalendarMonthIcon color="primary" />
-                </Box >
-              <Box>
-              <Typography>42 </Typography>
-              <Typography>Appointments This Week</Typography>
-              </Box>
-            </Stack>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Box
+                </Box>
+                <Box>
+                  <Typography>42</Typography>
+                  <Typography>Appointments This Week</Typography>
+                </Box>
+              </Stack>
+
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Box
                   sx={{
                     width: 55,
                     height: 55,
@@ -109,14 +119,15 @@ export default function Overview() {
                   }}
                 >
                   <StarIcon color="success" />
-                </Box >
-              <Box>
-              <Typography>248 Reviews </Typography>
-              <Typography> Patient Feedback</Typography>
-              </Box>
-            </Stack>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Box
+                </Box>
+                <Box>
+                  <Typography>248 Reviews</Typography>
+                  <Typography>Patient Feedback</Typography>
+                </Box>
+              </Stack>
+
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Box
                   sx={{
                     width: 55,
                     height: 55,
@@ -128,28 +139,54 @@ export default function Overview() {
                   }}
                 >
                   <AccessTimeIcon sx={{ color: "purple" }} />
-                </Box >
-              <Box>
-              <Typography>&lt; 2 Hours </Typography>
-              <Typography>Avg Response Time</Typography>
-              </Box>
+                </Box>
+                <Box>
+                  <Typography>&lt; 2 Hours</Typography>
+                  <Typography>Avg Response Time</Typography>
+                </Box>
+              </Stack>
             </Stack>
-          </Stack>
-        </Paper>
+          </Paper>
+        </Grid>
 
         {/* EARNINGS */}
-          <Paper elevation={0} sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff" }}>
+        <Grid item>
+          <Paper
+            elevation={0}
+            sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff" }}
+          >
             <Typography variant="h6" mb={2}>
               Earnings Overview
             </Typography>
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-              <Paper elevation={0} sx={{ p: 2, borderRadius: 3, minWidth: 300, border: "1px solid #c0c0c0ff" }}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={2}
+              justifyContent="space-between"
+            >
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 2,
+                  borderRadius: 3,
+                  minWidth: 150,
+                  border: "1px solid #c0c0c0ff",
+                }}
+              >
                 <Typography variant="body2" color="text.secondary">
                   Today
                 </Typography>
                 <Typography fontWeight={700}>Rs. 6000</Typography>
               </Paper>
-              <Paper elevation={0} sx={{ p: 2, borderRadius: 3, minWidth: 300, border: "1px solid #c0c0c0ff"  }}>
+
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 2,
+                  borderRadius: 3,
+                  minWidth: 150,
+                  border: "1px solid #c0c0c0ff",
+                }}
+              >
                 <Typography variant="body2" color="text.secondary">
                   This Month
                 </Typography>
@@ -157,11 +194,17 @@ export default function Overview() {
               </Paper>
             </Stack>
           </Paper>
-          </Box>
+        </Grid>
+      </Grid>
 
-        <Box>
+      {/* RIGHT COLUMN */}
+      <Grid item xs={12} md={4} container direction="column" spacing={3}>
         {/* QUICK INFO */}
-          <Paper elevation={0} sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff",mb: 3}}>
+        <Grid item>
+          <Paper
+            elevation={0}
+            sx={{ p: 3, borderRadius: 4, border: "1px solid #c0c0c0ff" }}
+          >
             <Typography variant="h6" mb={2}>
               Quick Information
             </Typography>
@@ -177,7 +220,7 @@ export default function Overview() {
 
             <Typography fontWeight={600}>Experience</Typography>
             <Typography mb={2}>15+ Years</Typography>
-            
+
             <Divider sx={{ my: 2 }} />
 
             <Typography fontWeight={600}>Availability Status</Typography>
@@ -188,8 +231,10 @@ export default function Overview() {
             <Typography fontWeight={600}>Next Available Slot</Typography>
             <Typography>Today at 4:00 PM</Typography>
           </Paper>
+        </Grid>
 
         {/* CARE TIP */}
+        <Grid item>
           <Paper
             elevation={0}
             sx={{
@@ -197,7 +242,8 @@ export default function Overview() {
               borderRadius: 4,
               backgroundColor: "#eaf1ff",
               border: "1px solid #bcd3ff",
-            }}>
+            }}
+          >
             <Stack direction="row" spacing={2} alignItems="center">
               <FavoriteIcon color="primary" fontSize="large" />
               <Box>
@@ -209,7 +255,8 @@ export default function Overview() {
               </Box>
             </Stack>
           </Paper>
-          </Box>
-    </Box>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }

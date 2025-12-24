@@ -13,12 +13,16 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import StarIcon from "@mui/icons-material/Star";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import DrMichael from "../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
 
 
 export default function DoctorProfile() {
   const [tab, setTab] = React.useState(0);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   
   const logout = () => {
     navigate("/");
@@ -120,7 +124,7 @@ export default function DoctorProfile() {
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 50, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -137,13 +141,13 @@ export default function DoctorProfile() {
                   }}
                   icon={<EventIcon />}
                   iconPosition="start" 
-                  label="Appointments" />
+                  label={isMobile ? "" : "Appointments"} />
 
               <Tab
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 50, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -160,13 +164,13 @@ export default function DoctorProfile() {
                   }}
                   icon={<InfoIcon />}
                   iconPosition="start"
-                  label="Credentials" />
+                  label={isMobile ? "" : "Credentials"} />
             
               <Tab
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 50, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -183,13 +187,13 @@ export default function DoctorProfile() {
                   }}
                   icon={<StarIcon />}
                   iconPosition="start"
-                  label="Reviews" />
+                  label={isMobile ? "" : "Reviews"} />
 
               <Tab 
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 50, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -206,13 +210,13 @@ export default function DoctorProfile() {
                   }}
                   icon={<SettingsIcon />}
                   iconPosition="start"
-                  label="Settings" />
+                  label={isMobile ? "" : "Settings"}/>
 
               <Tab
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 50, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -229,7 +233,7 @@ export default function DoctorProfile() {
                   }}
                   icon={<DashboardIcon />}
                   iconPosition="start" 
-                  label="Overview" />
+                  label={isMobile ? "" : "Overview"} />
             </Tabs>
         </Paper>
 

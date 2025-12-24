@@ -107,9 +107,11 @@ const handlebookConsultation = () => {
 
               {/* Book Consultation button (inside menu) */}
               <MenuItem>
+              {!isDoctorLoggedIn && (
                 <Button fullWidth variant="contained" sx={{ backgroundColor: "black" }} onClick={() => {handlebookConsultation();}}>
                   Book Consultation
                 </Button>
+              )}
               </MenuItem>
             </Menu>
           </Box>

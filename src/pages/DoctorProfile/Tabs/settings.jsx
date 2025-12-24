@@ -87,19 +87,19 @@ export default function SettingsPage() {
                 label="Video Consultation Fee (Rs.)"
                 defaultValue={1500}
                 fullWidth
-                sx={{ minWidth: 350, }}
+                sx={{ minWidth: {xs: 200, md: 350} }}
               />
               <TextField
                 label="In-Person Visit Fee (Rs.)"
                 defaultValue={2000}
                 fullWidth
-                sx={{ minWidth: 350 }}
+                sx={{ minWidth: {xs: 200, md: 350} }}
               />
               <TextField
                 label="Follow-Up Consultation Fee (Rs.)"
                 defaultValue={1000}
                 fullWidth
-                sx={{ minWidth: 350 }}
+                sx={{ minWidth: {xs: 200, md: 350} }}
               />
               <Button variant="contained" size="large">
                 Update Fees
