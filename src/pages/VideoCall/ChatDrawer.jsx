@@ -1,30 +1,22 @@
 import { useState } from "react";
-import {Drawer,Box,Tabs,Tab,IconButton,} from "@mui/material";
+import { Drawer, Box, Tabs, Tab, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 import ChatTab from "./Tabs/Chat";
 import InfoTab from "./Tabs/info";
 import NotesTab from "./Tabs/Notes";
 
-export default function ChatDrawer({open,onClose,SIDE_PANEL_WIDTH,}) {
+export default function ChatDrawer({ open, onClose, SIDE_PANEL_WIDTH }) {
+  const [tab, setTab] = useState(2); // 0=Info, 1=Notes, 2=Chat
 
-  const [tab, setTab] = useState(2); // 0=Info, 1=Notes, 2=Chat (default)
-  const [chatOpen,setChatOpen] = useState(false);
   const handleTabChange = (_, newTab) => {
     setTab(newTab);
-
-    // If Chat tab clicked
-    if (newTab === 2) {
-        setChatOpen(true);
-    }
   };
-
 
   return (
     <Drawer
       variant="persistent"
       anchor="right"
-      setChatOpen={setChatOpen}
       open={open}
       PaperProps={{
         sx: {
@@ -68,7 +60,7 @@ export default function ChatDrawer({open,onClose,SIDE_PANEL_WIDTH,}) {
         <Box sx={{ flex: 1, overflow: "hidden" }}>
           {tab === 0 && <InfoTab />}
           {tab === 1 && <NotesTab />}
-          {tab === 2 && <ChatTab isActive={true}/>}
+          {tab === 2 && <ChatTab isActive />}
         </Box>
       </Box>
     </Drawer>

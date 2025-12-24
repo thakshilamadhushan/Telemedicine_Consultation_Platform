@@ -8,9 +8,9 @@ import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
 import PatientVideoCall from "./pages/VideoCall/patientVideoCallUI";
 import DoctorVideoCall from "./pages/VideoCall/doctorVidoCallUi";
 import BookConsultationHome from './pages/BookConsultation/BookConsultation_Home';
-import ConsultationSelect_1 from './pages/BookConsultation/Consultation_select_1';
-import ConsultationSelect_2 from "./pages/BookConsultation/Consultation_select_2";
-import ConsultationSelect_3 from "./pages/BookConsultation/Consultation_select_3";
+import ConsultationSelect1 from './pages/BookConsultation/Consultation_select_1';
+import ConsultationSelect2 from "./pages/BookConsultation/Consultation_select_2";
+import ConsultationSelect3 from "./pages/BookConsultation/Consultation_select_3";
 
 
 function App() {
@@ -25,9 +25,9 @@ function App() {
         <Route path="/patientvideocall" element={<PatientVideoCall/>}/>
         <Route path="/doctorvideocall" element={<DoctorVideoCall/>}/>
         <Route path="/bookconsultation" element={<BookConsultationHome/>}/>
-        <Route path="/consultationselect_1" element={<ConsultationSelect_1/>}/>
-        <Route path="/consultationselect_2" element={<ConsultationSelect_2/>}/>
-        <Route path="/consultationselect_3" element={<ConsultationSelect_3/>}/>
+        <Route path="/consultationselect_1" element={<ConsultationSelect1/>}/>
+        <Route path="/consultationselect_2" element={<ConsultationSelect2/>}/>
+        <Route path="/consultationselect_3" element={<ConsultationSelect3/>}/>
       </Routes>
     </BrowserRouter>
   );

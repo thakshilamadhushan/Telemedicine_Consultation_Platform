@@ -165,14 +165,13 @@ const endCall = () => {
   setChatOpen(false);
   setSettingsOpen(false);
 
+  navigate("/doctor");
+
   // Optional: You can navigate to another page or show "Call ended" UI
   console.log("Call ended");
 };
 
 const navigate = useNavigate();
-const endSession = () => {
-  navigate("/doctor");
-};
 
   return (
     <Box sx={{ height: "100vh", display: "flex", bgcolor: "#0f1c2e" }}>
@@ -374,7 +373,7 @@ const endSession = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
-          <Button color="error" onClick={() => { endSession(); setConfirmOpen(false); }}>End Call</Button>
+          <Button color="error" onClick={() => { endCall(); setConfirmOpen(false); }}>End Call</Button>
         </DialogActions>
       </Dialog>
 
@@ -443,7 +442,6 @@ const endSession = () => {
             </Stack>
           </Box>
         </Drawer>
-
     </Box>
   );
 }

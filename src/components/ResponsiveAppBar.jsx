@@ -20,6 +20,7 @@ const pages = ['Home', 'Services', 'Feedbacks', 'About Us'];
 // CHANGED: added onSignInClick prop so parent can open the Login dialog
 function ResponsiveAppBar({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const showSignIn = !isDoctorLoggedIn && !isUserLoggedIn;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -91,7 +92,7 @@ const handlebookConsultation = () => {
               {/* Sign In button (inside menu)
                   CHANGED: call handleCloseNavMenu then onSignInClick from parent to open Login dialog */}
               <MenuItem>
-              {isDoctorLoggedIn || !isUserLoggedIn && (
+              {showSignIn && (
                 <Button
                   fullWidth
                   variant="outlined"
@@ -165,7 +166,7 @@ const handlebookConsultation = () => {
           {/* RIGHT-SIDE BUTTONS + PROFILE (Desktop only) */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
             
-            {isDoctorLoggedIn || !isUserLoggedIn && (
+            {showSignIn && (
             // CHANGED: desktop Sign In now calls onSignInClick to open Login dialog
             <Button
               variant="outlined"
