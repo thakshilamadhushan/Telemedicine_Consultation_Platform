@@ -3,24 +3,46 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useNavigate } from "react-router-dom";
 import Emily from "../../../assets/UserImages/Emily_chen.jpg";
 import Robert from "../../../assets/UserImages/Robert_Martinez.jpg";
 import Sarah from "../../../assets/UserImages/Sarah_Jonson.png";
+
+//** This part is only for testing purpose of Join session **
+const now = new Date();
+
+// add 9 minutes
+const futureTime = new Date(now.getTime() + 9 * 60000);
+
+// format date (e.g., Dec 23, 2025)
+const date = futureTime.toLocaleDateString("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+});
+
+// format time (e.g., 10:09 PM)
+const time = futureTime.toLocaleTimeString("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
+//** End of testing part **/
 
 const appointments = [
   {
     patientName: "Sarah Jonson",
     reason: "Heart Failure Management",
-    date: "Dec 15, 2025",
-    time: "10:00 AM",
+    date: date, // use dynamic date for testing
+    time: time, // use dynamic time for testing
     location: "Video Call",
     doctorImage: Sarah,
   },
   {
     patientName: "Robert Martinez",
     reason: "Preventive Cardiology",
-    date: "Dec 20, 2025",
-    time: "2:30 PM",
+    date: "Feb 23, 2026",
+    time: "10:35 PM",
     location: "Medical Center - Floor 3",
     doctorImage: Robert,
   },
@@ -83,7 +105,11 @@ const parseDateManual = (dateString, timeString) => {
 };
 
 export default function Appointments() {
-  
+  const navigate = useNavigate();
+  const joinSession = () => {
+    navigate("/doctorvideocall");
+  };
+
   console.log("Now:", new Date());  
 
   return (
@@ -108,7 +134,7 @@ export default function Appointments() {
         const diffMinutes = diffMs / (1000 * 60);
 
         // Show join button only if session is within next 10 minutes
-        const canJoinNow = diffMinutes <= 10 && diffMinutes > 0;
+        const canJoinNow = app.location === "Video Call" && (diffMinutes <= 10 && diffMinutes > 0);
 
         // DEBUG: log parsed date and status
         console.log(
@@ -169,7 +195,7 @@ export default function Appointments() {
                   </Button>
                   {/* SHOW JOIN ONLY IN LAST 10 MINUTES */}
                   {canJoinNow && (
-                    <Button variant="contained" size="small">
+                    <Button variant="contained" size="small" onClick={joinSession}>
                       Join Session
                     </Button>
                   )}

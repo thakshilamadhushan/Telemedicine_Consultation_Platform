@@ -91,6 +91,7 @@ const handlebookConsultation = () => {
               {/* Sign In button (inside menu)
                   CHANGED: call handleCloseNavMenu then onSignInClick from parent to open Login dialog */}
               <MenuItem>
+              {isDoctorLoggedIn || !isUserLoggedIn && (
                 <Button
                   fullWidth
                   variant="outlined"
@@ -101,7 +102,7 @@ const handlebookConsultation = () => {
                   }}
                 >
                   Sign In
-                </Button>
+                </Button> )}
               </MenuItem>
 
               {/* Book Consultation button (inside menu) */}
@@ -134,7 +135,15 @@ const handlebookConsultation = () => {
             flexGrow: 1,
             display: { xs: 'flex', md: 'none' },
           }}>
-            <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+            {isUserLoggedIn && (
+            <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
+              <Avatar alt="User" src={User} />
+            </IconButton> )}
+            
+            {isDoctorLoggedIn && (
+            <IconButton onClick={handleOpenUserDashboard} sx={{ p: 0 }}>
+              <Avatar alt="User" src={Doctor} />
+            </IconButton> )}
           </IconButton>
 
           {/* DESKTOP MENU ITEMS */}

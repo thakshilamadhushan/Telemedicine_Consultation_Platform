@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../../assets/login_picture.png"; //importing side picture
-import {Dialog,DialogTitle,DialogContent,DialogActions,TextField,Button,Box,Grid,Typography,Avatar} from "@mui/material";
-
-/*
-  Login modal component (MUI Dialog).
-  Props:
-    - open: boolean to show/hide dialog
-    - onClose: function to close dialog
-    - onLogin: callback called with form data after successful login (mock)
-    - onOpenRegister: callback to toggle to register modal
-*/
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import loginImage from "../../assets/login_picture.png"; 
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import {Dialog,DialogContent,TextField,Button,Box,Grid,Typography,Divider} from "@mui/material";
 
 const MOCK_USER = {
   email: "user@example.com",
@@ -33,7 +28,6 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
   };
 
   const validate = () => {
-    if (!form.email.trim() || !form.password) return "Email and password are required.";
     if (!/\S+@\S+\.\S+/.test(form.email)) return "Enter a valid email address.";
     if (form.password.length < 4) return "Password is too short.";
     return "";
@@ -84,148 +78,138 @@ export default function Login({ open, onClose, onLogin, onOpenRegister }) {
 
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth={false} PaperProps={{ sx: {
-                                                                                          width: {
-                                                                                            xs: "95%",
-                                                                                            sm: "85%",
-                                                                                            md: "900px",
-                                                                                            lg: "860px", // width of the dialog box
-                                                                                          }, }}}>
-      <DialogTitle
-        sx={{
-          textAlign: "center",
-          bgcolor: "#f5f5f5",
-          color: "#333",
-          fontWeight: 700,
-          py: 2,
-          borderBottom: "1px solid #ddd",
-        }}
+    <Dialog
+        open={open}
+        onClose={onClose}
+        maxWidth="md"
+        PaperProps={{ sx: { borderRadius: 4, overflow: "hidden" } }}
       >
-        <Typography variant="h6">User Login</Typography>
-      </DialogTitle>
+        <DialogContent sx={{ p: 0 }}>
+          <Grid container minHeight={480} >
 
-      <DialogContent sx={{ px: 4, py: 3 }}>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <Grid container spacing={3}>
-            {/* LEFT SIDE — Login form */}
-            <Grid item xs={12} md={6}>
-              <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: "bold", fontSize: "1.05rem", mb: 2 }}>
-                Sign in to your account
+            {/* LEFT — LOGIN FORM */}
+            <Grid
+              item
+              onSubmit={handleSubmit}
+              component="form"
+              xs={12}
+              md={8}
+              sx={{
+                p: { xs: 3, md: 5 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="h5" fontWeight={600} mb={1}>
+                Log In
               </Typography>
 
-              <TextField
-                label="Email"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-                required
+              <Typography color="text.secondary" mb={1} fontSize={{xs: 14, md: 16}}>
+                Welcome Back, Please Enter Your Details
+              </Typography>
+
+              <TextField label="Email" name="email" value={form.email} onChange={handleChange} fullWidth margin="normal" />
+              <TextField label="Password" name="password" type="password" value={form.password} onChange={handleChange} fullWidth margin="normal" />
+
+              {error && (
+                <Typography color="error" fontSize={14} mt={1}>
+                  {error}
+                </Typography>
+              )}
+
+              <Typography variant="body2" sx={{ mt: 1, mb: 2, cursor: "pointer" }}>
+                Forgot Password?
+              </Typography>
+
+              <Button
+                type="submit"
+                variant="contained"
                 fullWidth
-                margin="normal"
-                sx={{ "& .MuiInputBase-root": { borderRadius: 2 } }}
-              />
+                sx={{ py: 1.2, borderRadius: 3, textTransform: "none", mb: 3 }}
+                onClick={handleSubmit}
+                disabled={loading}                
+              >
+                {loading ? "Logging in..." : "Log In"}
+              </Button>
 
-              <TextField
-                label="Password"
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-                required
-                fullWidth
-                margin="normal"
-                sx={{ "& .MuiInputBase-root": { borderRadius: 2 } }}
-              />
-
-              <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  onClick={handleSubmit}
-                  disabled={loading}
-                  sx={{ px: 3, py: 1, textTransform: "none", fontWeight: "bold", minWidth: 120 }}
-                >
-                  {loading ? "Signing in..." : "Sign In"}
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  onClick={onClose}
-                  disabled={loading}
-                  sx={{ textTransform: "none", fontWeight: "bold", minWidth: 120 }}
-                >
-                  Cancel
-                </Button>
+              {/* Divider */}
+              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                <Divider sx={{ flex: 1,}} />
+                <Typography mx={2} variant="body2">
+                  Or Continue With
+                </Typography>
+                <Divider sx={{ flex: 1,}} />
               </Box>
 
-              <Box sx={{ mt: 2 }}>
+              {/* Social Login */}
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  flexDirection: { xs: "column", sm: "row" },
+                }}
+              >
                 <Button
                   variant="outlined"
                   fullWidth
-                  startIcon={<Avatar sx={{ width: 26, height: 26 }}>G</Avatar>}
-                  onClick={() => console.log("Google sign-in clicked")}
-                  sx={{ textTransform: "none", fontWeight: 600, py: 1.2, borderRadius: 2 }}
+                  startIcon={<GoogleIcon sx={{ color: "#DB4437" }} />}
+                  sx={{ textTransform: "none" }}
                 >
-                  Continue with Google
+                  Google
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  startIcon={<FacebookIcon sx={{ color: "#1877F2" }} />}
+                  sx={{ textTransform: "none" }}
+                >
+                  Facebook
                 </Button>
               </Box>
 
-              <Box sx={{ mt: 3, mb: 1, display: "flex", alignItems: "center" }}>
-                <Box sx={{ flexGrow: 1, height: 1, bgcolor: "grey.300" }} />
-                <Typography sx={{ mx: 2, color: "text.secondary", fontSize: "0.85rem" }}>or</Typography>
-                <Box sx={{ flexGrow: 1, height: 1, bgcolor: "grey.300" }} />
-              </Box>
-
+              <Box display={"flex"} justifyContent={"center"} alignItems={"center"} mt={3} >
+              <Typography>Don't have account?</Typography>
               <Button
-                fullWidth
                 variant="text"
                 onClick={() => {
                   onClose?.();
                   onOpenRegister?.();
-                }}
-                sx={{ textTransform: "none", fontWeight: "bold", py: 1, color: "black" }}
+                }} 
               >
-                Create an Account
+                Sign Up
               </Button>
-
-              {error && (
-                <Typography color="error" variant="body2" sx={{ mt: 1, fontWeight: 600 }}>
-                  {error}
-                </Typography>
-              )}
+              </Box>
             </Grid>
 
-            {/* RIGHT SIDE — Illustration */}
-            <Grid item xs={12} md={6}>
-                <Box
-                       sx={{
-                       height: "100%",
-                        minHeight: 320,
-                       borderRadius: 3,
-                       overflow: "hidden", // IMPORTANT
-                       border: "1px dashed #ccc", }}
-                     >
-                  <img
-                    src={loginImage}
-                    alt="Login Illustration"
-                    style={{
-                      width: "100%",
-                      maxWidth: 320,
-                      height: "auto",
-                      objectFit: "contain",
-                    }}
-                  />
-                </Box>
-              </Grid>
-          </Grid>
-        </Box>
-      </DialogContent>
+            {/* RIGHT — ILLUSTRATION (DESKTOP ONLY) */}
+            <Grid
+              item
+              md={4}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+                justifyContent: "flex-end",
+                bgcolor: "#EAF8FF",
+                position: "relative",
+              }}
+            >
+              <IconButton
+                onClick={onClose}
+                sx={{ position: "absolute", top: 12, right: 12 }}
+              >
+                <CloseIcon />
+              </IconButton>
 
-      <DialogActions>
-        <Button onClick={onClose} disabled={loading}>
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+              <Box sx={{ maxWidth: 400 }}>
+                <img src={loginImage} alt="Doctor Illustration" style={{ width: "100%", display: "block" }} />
+              </Box>
+            </Grid>
+
+          </Grid>
+        </DialogContent>
+      </Dialog>
+
   );
 }

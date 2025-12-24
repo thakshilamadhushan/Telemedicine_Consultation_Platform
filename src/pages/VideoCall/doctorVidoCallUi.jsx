@@ -13,6 +13,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import Emilychen from "../../assets/VideoCall/Emily_chen.jpg";
 import ChatDrawer from "./ChatDrawer";
+import { useNavigate } from "react-router-dom";
 import HeartRate from "../../assets/icons/DoctorVideoCall/beat-blue.png";
 import Heart from "../../assets/icons/DoctorVideoCall/heart-red.png";
 import Thermometer from "../../assets/icons/DoctorVideoCall/thermometer-orange.png";
@@ -166,6 +167,11 @@ const endCall = () => {
 
   // Optional: You can navigate to another page or show "Call ended" UI
   console.log("Call ended");
+};
+
+const navigate = useNavigate();
+const endSession = () => {
+  navigate("/doctor");
 };
 
   return (
@@ -368,7 +374,7 @@ const endCall = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
-          <Button color="error" onClick={() => { endCall(); setConfirmOpen(false); }}>End Call</Button>
+          <Button color="error" onClick={() => { endSession(); setConfirmOpen(false); }}>End Call</Button>
         </DialogActions>
       </Dialog>
 

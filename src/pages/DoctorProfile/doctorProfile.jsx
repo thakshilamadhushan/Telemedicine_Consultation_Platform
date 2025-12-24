@@ -12,10 +12,17 @@ import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import StarIcon from "@mui/icons-material/Star";
+import { useNavigate } from "react-router-dom";
 import DrMichael from "../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
+
 
 export default function DoctorProfile() {
   const [tab, setTab] = React.useState(0);
+  const navigate = useNavigate();
+  
+  const logout = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -71,12 +78,12 @@ export default function DoctorProfile() {
             </Stack>
           </Box>
 
-          <Box sx={{p: 2}} >
+          <Box sx={{p: 2, maxWidth: 300}}>
             <Box display="flex" gap={3} mb={2}>
-              <Button variant="contained">Edit Profile</Button>
-              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }}>Log Out</Button>
+              <Button  variant="contained">Edit Profile</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => {logout();}}>Log Out</Button>
             </Box>
-            <Button variant="outlined" >View Shedule</Button>
+            <Button fullWidth variant="outlined" >View Schedule</Button>
           </Box>
         </Paper>
 

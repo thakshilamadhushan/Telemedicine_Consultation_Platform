@@ -83,7 +83,7 @@ export default function feedbacksSection() {
           <Grid item xs={12} key={index}>
             <Card
               sx={{
-                p: 4,
+                p: 2,
                 borderRadius: 3,
                 border: "1px solid #e0e0e0",
                 boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
@@ -102,7 +102,7 @@ export default function feedbacksSection() {
                 <Box>
                     {/* NAME + VERIFIED HERE */}
                     <Stack direction="row" spacing={1} alignItems="center">
-                    <Typography variant="h6" fontWeight={600}>
+                    <Typography  fontWeight={600}>
                         {fb.name}
                     </Typography>
 
@@ -115,6 +115,7 @@ export default function feedbacksSection() {
                         backgroundColor: "#E8F3FF",
                         color: "#1976D2",
                         fontWeight: 500,
+                        width: "fit-content",
                         }}
                     >
                         {fb.status}
@@ -155,6 +156,7 @@ export default function feedbacksSection() {
                   mt: 3,
                   color: "gray",
                   lineHeight: 1.7,
+                  textAlign: "justify",
                 }}
               >
                 “{fb.message}”

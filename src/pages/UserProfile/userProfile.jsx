@@ -10,11 +10,21 @@ import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import user from "../../assets/UserImages/Emily_chen.jpg";
 
 
 export default function UserProfile() {
   const [tab, setTab] = React.useState(0);
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const logout = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -69,7 +79,7 @@ export default function UserProfile() {
           <Box sx={{p: 2}} >
             <Box display="flex" gap={3} mb={2}>
               <Button variant="contained">Edit Profile</Button>
-              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }}>Log Out</Button>
+              <Button variant="contained" style={{ backgroundColor: 'red', color: 'white' }} onClick={() => {logout();}}>Log Out</Button>
             </Box>
             <Button variant="outlined">Download Medical Records</Button>
           </Box>
@@ -100,7 +110,7 @@ export default function UserProfile() {
                   gap: 1,
                 },
                 "& .MuiTabs-indicator": {
-                  display: "none",  // hide underline
+                  display: "none",  
                 },
             }}
             >
@@ -108,7 +118,7 @@ export default function UserProfile() {
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 70, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -125,13 +135,13 @@ export default function UserProfile() {
                   }}
                   icon={<EventIcon />}
                   iconPosition="start" 
-                  label="Appointments" />
+                  label={isMobile ? "" : "Appointments"} />
 
               <Tab
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 70, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -148,13 +158,13 @@ export default function UserProfile() {
                   }}
                   icon={<InfoIcon />}
                   iconPosition="start"
-                  label="Medical Info" />
+                  label={isMobile ? "" : "Medical Info"} />
 
               <Tab 
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 70, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -171,13 +181,13 @@ export default function UserProfile() {
                   }}
                   icon={<SettingsIcon />}
                   iconPosition="start"
-                  label="Settings" />
+                  label={isMobile ? "" : "Settings"} />
 
               <Tab
                   sx={{
                     textTransform: "none",
                     fontWeight: 600,
-                    minWidth: 180,
+                    minWidth: {xs: 70, md:180},
                     minHeight: 0,
                     px: 2,
                     borderRadius: 10,
@@ -194,7 +204,7 @@ export default function UserProfile() {
                   }}
                   icon={<DashboardIcon />}
                   iconPosition="start" 
-                  label="Overview" />
+                  label={isMobile ? "" : "Overview"} />
             </Tabs>
         </Paper>
 

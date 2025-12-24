@@ -3,25 +3,46 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useNavigate } from "react-router-dom";
 import DrMichael from "../../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
 import DrEmily from "../../../assets/DoctorsImages/Dr.Emily_Rodriguez.jpg";
 import DrJames from "../../../assets/DoctorsImages/Dr.James_Wilson.jpg";
 
+//** This part is only for testing purpose of Join session **
+const now = new Date();
+
+// add 9 minutes
+const futureTime = new Date(now.getTime() + 9 * 60000);
+
+// format date (e.g., Dec 23, 2025)
+const date = futureTime.toLocaleDateString("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+});
+
+// format time (e.g., 10:09 PM)
+const time = futureTime.toLocaleTimeString("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
+//** End of testing part **/
 
 const appointments = [
   {
     doctorName: "Dr. Michael Chen",
     specialty: "Cardiologist",
-    date: "Dec 15, 2025",
-    time: "10:00 AM",
+    date: date, // use dynamic date for testing
+    time: time,// use dynamic time for testing
     location: "Video Call",
     doctorImage: DrMichael,
   },
   {
     doctorName: "Dr. Emily Rodriguez",
     specialty: "General Practitioner",
-    date: "Dec 20, 2025",
-    time: "2:30 PM",
+    date: "Feb 05, 2026",
+    time: "9:50 PM",
     location: "Medical Center - Floor 3",
     doctorImage: DrEmily,
   },
@@ -83,7 +104,12 @@ const parseDateManual = (dateString, timeString) => {
   return new Date("Invalid");
 };
 
+
 export default function Appointments() {
+  const navigate = useNavigate();
+  const joinSession = () => {
+    navigate("/patientvideocall");
+  };
   
   console.log("Now:", new Date());  
 
@@ -92,7 +118,7 @@ export default function Appointments() {
       elevation={0}
       sx={{
         border: "1px solid #ebebebff",
-        p: 3,
+        p: {xs:2, md:3},
         borderRadius: 4,
       }}
     >
@@ -108,28 +134,16 @@ export default function Appointments() {
         const diffMs = sessionDateTime - now;   // milliseconds
         const diffMinutes = diffMs / (1000 * 60);
 
-        // Show join button only if session is within next 10 minutes
-        const canJoinNow = diffMinutes <= 10 && diffMinutes > 0;
+        // Show join button only if session is within next 10 minutes and vidoe call
+        const canJoinNow = app.location === "Video Call" && (diffMinutes <= 10 && diffMinutes > 0);
 
-        // DEBUG: log parsed date and status
-        console.log(
-          `app[${index}]`,
-          app.date,
-          app.time,
-          "=> parsed:",
-          sessionDateTime,
-          "valid?",
-          isValid,
-          "isCompleted?",
-          isCompleted
-        );
         return (
       
         <Paper
           key={index}
           elevation={0}
           sx={{
-            p: 2,
+            p: {xs:1, md:2},
             mb: 2,
             borderRadius: 3,
             border: "1px solid #d1d1d1",
@@ -137,32 +151,45 @@ export default function Appointments() {
           }}
         >
           {/* ROW: Doctor Image + Info */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Avatar src={app.doctorImage} sx={{ width: 80, height: 80 }}/>
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: { xs: "flex-start", sm: "center" }, gap: 2 }}>
+            <Avatar src={app.doctorImage} sx={{ width: { xs: 60, sm: 80 }, height: { xs: 60, sm: 80 } }}/>
 
-            <Box sx={{ flex: 1}} >
-              <Box sx={{flex: 1}} alignItems="center" display="flex" gap={1}>
+            <Box sx={{ flex: 1, width: "100%"}} >
+              <Box sx={{display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: { xs: "flex-start", sm: "center" },}}>
               <Typography sx={{ fontWeight: 600 }}>{app.doctorName}</Typography>
               <Chip
                   label={isCompleted ? "Completed" : "Upcoming"}
                   color={isCompleted ? "success" : "warning"}
                   size="small"
-                  sx={{ width: "fit-content", display: "flex", ml: "auto"}}
+                  sx={{ mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: "auto" } }}
                 />
               </Box>
-              <Typography variant="body2" color="gray">
+              <Typography variant="body2" color="gray" sx={{ mt: 0.5 }}>
                 {app.specialty}
               </Typography>
 
+              {/* Date, Time, Location */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  alignItems: { xs: "flex-start", sm: "center" },
+                  gap: 1,
+                  mt: 1,
+                  flexWrap: "wrap",
+                }}
+              >
               <Typography variant="body2" display="flex" alignItems="center" gap={1}>
                 <CalendarMonthIcon /> {app.date} <ScheduleIcon/> {app.time} {app.location === "Video Call" ? (
                   <VideocamIcon />
                 ) : (
                   <LocationOnIcon />
                 )} {app.location}
+              </Typography>
+                </Box>
 
                 {/* BUTTONS */}
-                <Box sx={{ mt: 1, display: "flex", gap: 1, justifyContent: "center", ml: "auto"}}>
+                <Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "flex-start", sm: "flex-end" },}}>
                   {!isCompleted && (
                   <>
                   <Button variant="contained" size="small">
@@ -170,7 +197,7 @@ export default function Appointments() {
                   </Button>
                   {/* SHOW JOIN ONLY IN LAST 10 MINUTES */}
                   {canJoinNow && (
-                    <Button variant="contained" size="small">
+                    <Button variant="contained" size="small" onClick={joinSession}>
                       Join Session
                     </Button>
                   )}
@@ -186,7 +213,6 @@ export default function Appointments() {
                     </Button>
                   )}
                 </Box>
-              </Typography>
             </Box>
           </Box>
         </Paper>

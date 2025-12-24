@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ResponsiveAppBar from '../../components/ResponsiveAppBar';
 import Footer from "../../components/Footer";
-import { Box, Typography, TextField, Card, CardActionArea, InputAdornment, Container,IconButton} from '@mui/material';
+import { Box, Typography, TextField, Card, CardActionArea, InputAdornment, Container} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import FaceIcon from '@mui/icons-material/Face';
@@ -41,14 +40,13 @@ const BookConsultationHome = () => {
     <Container maxWidth="lg" sx={{ pt: 6, py: 6, backgroundColor: '#fff', minHeight: '100vh' }}>
       
       {/* Header Section */}
-      <Box textAlign="center" mb={4}>
+      <Box textAlign="center" mb={1}>
         <Typography 
           variant="h4" 
           component="h1" 
           sx={{ 
             fontWeight: 'bold',  
-            color: '#1976d2', // Blue color from image
-            mb: 1,
+            color: '#1976d2', 
             textUnderlineOffset: '6px'
           }}
         >
@@ -89,7 +87,7 @@ const BookConsultationHome = () => {
         sx={{ 
           border: '1px solid #e0e0e0', 
           borderRadius: '12px', 
-          p: { xs: 2, md: 6 },
+          p: { xs: 2, md: 3 },
           backgroundColor: '#fafafa',
           display: 'grid',
           gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
@@ -106,7 +104,7 @@ const BookConsultationHome = () => {
               '&:hover': { boxShadow: '0px 8px 20px rgba(0,0,0,0.1)' }
             }}
           >
-            <CardActionArea sx={{ p: 4, textAlign: 'center', height: '100%' }} onClick={() => navigate('/consultationselect', { state: { specialty: specialty.name } })}>
+            <CardActionArea sx={{ p: 4, textAlign: 'center', height: '100%' }} onClick={() => navigate('/consultationselect_1', { state: { specialty: specialty.name } })}>
               
               {/* Icon */}
               <Box sx={{ margin: '0 auto 16px' }}>
@@ -119,15 +117,6 @@ const BookConsultationHome = () => {
               >
                 {specialty.name}
               </Typography>
-              <IconButton 
-                sx={{ mt: 1, color: '#1976d2' }}
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent CardActionArea click
-                  navigate('/consultationselect', { state: { specialty: specialty.name } });
-                }}
-              >
-                <ArrowForwardIcon />
-              </IconButton>
             </CardActionArea>
           </Card>
         ))}

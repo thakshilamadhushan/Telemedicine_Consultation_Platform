@@ -8,7 +8,9 @@ import DoctorProfile from "./pages/DoctorProfile/doctorProfile";
 import PatientVideoCall from "./pages/VideoCall/patientVideoCallUI";
 import DoctorVideoCall from "./pages/VideoCall/doctorVidoCallUi";
 import BookConsultationHome from './pages/BookConsultation/BookConsultation_Home';
-import ConsultationSelect from './pages/BookConsultation/Consultation_select';
+import ConsultationSelect_1 from './pages/BookConsultation/Consultation_select_1';
+import ConsultationSelect_2 from "./pages/BookConsultation/Consultation_select_2";
+import ConsultationSelect_3 from "./pages/BookConsultation/Consultation_select_3";
 
 
 function App() {
@@ -23,7 +25,9 @@ function App() {
         <Route path="/patientvideocall" element={<PatientVideoCall/>}/>
         <Route path="/doctorvideocall" element={<DoctorVideoCall/>}/>
         <Route path="/bookconsultation" element={<BookConsultationHome/>}/>
-        <Route path="/consultationselect" element={<ConsultationSelect/>}/>
+        <Route path="/consultationselect_1" element={<ConsultationSelect_1/>}/>
+        <Route path="/consultationselect_2" element={<ConsultationSelect_2/>}/>
+        <Route path="/consultationselect_3" element={<ConsultationSelect_3/>}/>
       </Routes>
     </BrowserRouter>
   );

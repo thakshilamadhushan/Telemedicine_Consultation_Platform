@@ -6,7 +6,7 @@ const icons = importAll(require.context("../assets/icons/Hero", false, /\.(png|j
 
 export default function HomeSection({ onSignInClick }) {
   return (
-    <Box id="home" sx={{ width: "90%", mt: 15, px: { xs: 2, md: 6 } }} mx="auto">
+    <Box id="home" sx={{ width: "90%", mt: {xs:5, md: 8}, px: { xs: 2, md: 6 } }} mx="auto">
 
       {/* TOP HERO SECTION */}
       <Grid
@@ -24,7 +24,6 @@ export default function HomeSection({ onSignInClick }) {
           sx={{
             display: "flex",
             justifyContent: { xs: "center", md: "flex-end" },
-            mb: { xs: 4, md: 0 },
             gap: 2,
           }}
         >
@@ -88,6 +87,7 @@ export default function HomeSection({ onSignInClick }) {
                 px: 3,
                 py: 1.5,
                 borderRadius: 2,
+                fontSize:{xs:12, md:14},
               }}
             >
               Get Started Now →

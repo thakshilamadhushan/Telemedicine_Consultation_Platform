@@ -27,7 +27,7 @@ export default function PublicHome() {
     <>
       <ResponsiveAppBar isUserLoggedIn={false} onSignInClick={() => setOpenLogin(true)} />
 
-      <Container sx={{ mt: 2 }}>
+      <Container>
         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
           {/* Button: open login popup */}
           <Button variant="outlined" onClick={() => setOpenLogin(true)}>

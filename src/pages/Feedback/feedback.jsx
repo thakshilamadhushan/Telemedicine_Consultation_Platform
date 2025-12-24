@@ -12,6 +12,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useNavigate } from "react-router-dom";
 import DrMichael from "../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
 
 const ratingConfig = [
@@ -93,6 +94,11 @@ export default function SessionFeedbackDialog({ open, onClose }) {
     ratings.attentiveness +
     ratings.technical
   ) / 5;
+
+  const navigate = useNavigate();
+  const showDashboard = () => {
+    navigate("/user");
+  };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
@@ -389,7 +395,7 @@ export default function SessionFeedbackDialog({ open, onClose }) {
             mt: 4,
           }}
         >
-          <Button onClick={onClose} variant="outlined">
+          <Button onClick={showDashboard} variant="outlined">
             Skip For Now
           </Button>
           <Button variant="contained">Submit Feedback</Button>

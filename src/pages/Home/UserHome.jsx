@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import ResponsiveAppBar from '../../components/ResponsiveAppBar';
 import Footer from "../../components/Footer";
 import HomeSection from '../../components/Home_hero';
@@ -9,7 +10,9 @@ export default function PublicHome() {
   return (
     <>
       <ResponsiveAppBar isUserLoggedIn={true}/>
-      <HomeSection />
+      <Box sx={{ mt: 10 }}>
+        <HomeSection />
+      </Box>
       <WhyChooseUs />
       <OurServices />
       <Feedbacks />
