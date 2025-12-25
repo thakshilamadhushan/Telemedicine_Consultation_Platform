@@ -1,10 +1,18 @@
 import { Box, Grid, Typography, Button, Card, Stack } from "@mui/material";
 import heroImg from "../assets/Hero_image_1.jpg";
+import { useNavigate } from "react-router-dom";
 const importAll = (context) => context.keys().map(context);
 const icons = importAll(require.context("../assets/icons/Hero", false, /\.(png|jpe?g|svg)$/));
 
 
-export default function HomeSection({ onSignInClick }) {
+export default function HomeSection({ isUserLoggedIn, isDoctorLoggedIn, onSignInClick }) {
+  const navigate = useNavigate();
+
+  const handlebookConsultation = () => {
+    if (isUserLoggedIn) navigate("/bookconsultation");
+    else {onSignInClick();}
+  }
+
   return (
     <Box id="home" sx={{ width: "90%", mt: {xs:5, md: 8}, px: { xs: 2, md: 6 } }} mx="auto">
 
@@ -79,9 +87,10 @@ export default function HomeSection({ onSignInClick }) {
 
           {/* Buttons */}
           <Stack direction="row" spacing={2}>
+            {!isDoctorLoggedIn && (
             <Button
               variant="contained"
-              onClick={onSignInClick}
+              onClick={handlebookConsultation}
               sx={{
                 background: "linear-gradient(to right, #009dff, #005bbb)",
                 px: 3,
@@ -91,7 +100,7 @@ export default function HomeSection({ onSignInClick }) {
               }}
             >
               Get Started Now →
-            </Button>
+            </Button>)}
 
             <Button
               variant="outlined"

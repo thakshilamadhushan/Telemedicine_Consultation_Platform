@@ -1,22 +1,5 @@
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button,
-  Box,
-  Alert,
-  Typography,
-  MenuItem,
-  Stepper,
-  Step,
-  StepLabel,
-  Checkbox,
-  FormControlLabel,
-} from "@mui/material";
-// Icons for visual representation of the steps
+import {Dialog,DialogTitle,DialogContent,DialogActions,TextField,Button,Box,Alert,Typography,MenuItem,Stepper,Step,StepLabel,Checkbox,FormControlLabel,} from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContactMailIcon from "@mui/icons-material/ContactMail";

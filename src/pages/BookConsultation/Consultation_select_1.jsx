@@ -5,7 +5,8 @@ import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import NavBar from "../../components/ResponsiveAppBar";
 import Footer from "../../components/Footer";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 
 const doctorsData = [
   {
@@ -51,14 +52,20 @@ const doctorsData = [
 ];
 
 export default function DoctorBooking() {
-  // 🔹 States
+  const location = useLocation();
+  const passedSpecialty = location.state?.specialty || "All";
   const [search, setSearch] = useState("");
-  const [specialty, setSpecialty] = useState("All");
+  const [specialty, setSpecialty] = useState(passedSpecialty);
   const [language, setLanguage] = useState("All");
   const [availability, setAvailability] = useState("All");
   const [minRating, setMinRating] = useState(4);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
-
+  
+  useEffect(() => {
+    if (passedSpecialty) {
+      setSpecialty(passedSpecialty);
+    }
+  }, [passedSpecialty]);
 
   // 🔹 Filter logic
   const filteredDoctors = useMemo(() => {

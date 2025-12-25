@@ -6,8 +6,8 @@ import WhyChooseUs from '../../components/whyChooseUs';
 import OurServices from '../../components/OurServices';
 import Feedbacks from '../../components/Feedbacks';
 import { Container, Box, Button } from "@mui/material";
-import Login from "../Auth/Login"; // import the Login modal
-import RegisterUser from "../Auth/RegisterUser"; // CHANGED: import RegisterUser modal
+import Login from "../Auth/Login"; 
+import RegisterUser from "../Auth/RegisterUser"; 
 
 export default function PublicHome() {
   const [openLogin, setOpenLogin] = useState(false);

@@ -11,7 +11,7 @@ export default function PublicHome() {
     <>
       <ResponsiveAppBar isUserLoggedIn={true}/>
       <Box sx={{ mt: 10 }}>
-        <HomeSection />
+        <HomeSection isUserLoggedIn={true}/>
       </Box>
       <WhyChooseUs />
       <OurServices />
