@@ -2,7 +2,16 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 
 export default function NotesTab() {
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ 
+      p: 2, 
+      height:"100%", 
+      maxHeight: "100dvh", 
+      overflow: "auto",
+      scrollBehavior: "smooth",
+      "&::-webkit-scrollbar": { width: 6 },
+      "&::-webkit-scrollbar-thumb": { backgroundColor: "#444", borderRadius: 3 }
+      }}>
+
       <Typography mb={1}>
         Chief Complaint
       </Typography>
@@ -68,7 +77,7 @@ export default function NotesTab() {
         }}
       />
 
-      <Box display={"flex"} gap={3} justifyContent={"center"}>
+      <Box display={"flex"} gap={3} justifyContent={"center"} mb={3}>
         <Button variant="contained" style={{ backgroundColor: "#1726ffff", color: 'white',}}>
           Save Note
         </Button>

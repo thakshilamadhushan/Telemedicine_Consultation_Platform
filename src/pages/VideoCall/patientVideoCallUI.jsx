@@ -14,6 +14,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SessionFeedbackDialog from "../Feedback/feedback";
 import DrMichael from "../../assets/VideoCall/Dr.Michael_Chen.jpg";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const SIDE_PANEL_WIDTH = 350;
 
@@ -31,6 +33,8 @@ export default function VideoCallUI() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const hasWelcomedRef = useRef(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
   let localStream;
@@ -211,7 +215,7 @@ const sendMessage = () => {
 
 
   return (
-    <Box sx={{ height: "100vh", display: "flex", bgcolor: "#0f1c2e" }}>
+    <Box sx={{ height: "100dvh", display: "flex", bgcolor: "#0f1c2e" }}>
       {/* MAIN AREA */}
       <Box sx={{ flex: 1, position: "relative", transition: "margin-right 0.3s ease", marginRight: chatOpen || settingsOpen ? `${SIDE_PANEL_WIDTH}px` : 0,}}>
         {/* HEADER */}
@@ -327,12 +331,12 @@ const sendMessage = () => {
         <Box
           sx={{
             position: "absolute",
-            left: "50%",
+            left: {xs: "40%", md: "50%"},
             transform: "translateX(-50%)",
           }}
         >
 
-        <Stack direction="row" spacing={2} alignItems="center">
+        <Stack direction="row" spacing={{xs:1 , md: 2}} alignItems="center">
 
           <IconButton onClick={toggleVideo}  sx={{ bgcolor: "white", "&:hover": { bgcolor: "white",},}} disabled={!stream}>
             {videoOn ? <VideocamIcon /> : <VideocamOffIcon />}
@@ -356,15 +360,24 @@ const sendMessage = () => {
         </Box>
         
         {/* END CALL BUTTON (RIGHT CORNER) */}
-        <Box sx={{ marginLeft: "auto" }}>
+        <Box sx={{ marginLeft: "auto", marginRight:-1}}>
           <Button
             variant="contained"
             color="error"
-            startIcon={<CallEndIcon />}
+            startIcon={isMobile ? null : <CallEndIcon />}
             onClick={() => setConfirmOpen(true)}
-            sx={{ borderRadius: 3, px: 3 }}
+            sx={{ 
+              borderRadius: isMobile ? "50%" : 3,
+              minWidth: isMobile ? 48 : "auto",
+              width: isMobile ? 48 : "auto",
+              height: isMobile ? 48 : "auto",
+              px: isMobile ? 0 : 3,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            End Call
+            {isMobile ?  <CallEndIcon /> : "End Call"}
           </Button>
          </Box>
         </Box>

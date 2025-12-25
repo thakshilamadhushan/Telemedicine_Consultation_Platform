@@ -2,9 +2,18 @@ import { Box, Typography, Paper } from "@mui/material";
 
 export default function InfoTab() {
   return (
-    <Box sx={{ p: 2 }} >
+    <Box sx={{ 
+      p: 2,
+      height:"100%", 
+      maxHeight: "100dvh", 
+      overflow: "auto",
+      scrollBehavior: "smooth",
+      "&::-webkit-scrollbar": { width: 6 },
+      "&::-webkit-scrollbar-thumb": { backgroundColor: "#444", borderRadius: 3 }
+      }}>
+
         {/* PATIENT DETAILS */}
-      <Paper elevation={0} sx={{ p: 3, borderRadius: 4, backgroundColor: "#08111dff", mb: 2}}>
+      <Paper elevation={0} sx={{ p: 3, borderRadius: 4, backgroundColor: "#08111dff", mb: 2,}}>
         <Typography variant="h6" mb={2} color="white">
           Patient Details
         </Typography>
@@ -45,7 +54,7 @@ export default function InfoTab() {
       </Paper>
 
       {/* CURRENT MEDICATIONS */ }
-      <Paper elevation={0} sx={{ p: 3, borderRadius: 4, backgroundColor: "#08111dff"}}>
+      <Paper elevation={0} sx={{ p: 3, borderRadius: 4, backgroundColor: "#08111dff", mb: 3}}>
         <Typography variant="h6" mb={2} color="white">
           Current Medications
         </Typography>

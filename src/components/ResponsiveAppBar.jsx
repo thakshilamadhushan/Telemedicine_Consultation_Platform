@@ -83,14 +83,37 @@ const handlebookConsultation = () => {
               onClose={handleCloseNavMenu}
             >
               {/* Navigation pages */}
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                  width: "100%",
+                }}
+              >
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    fullWidth
+                    sx={{
+                      my: 1,
+                      px:2,
+                      pr:12,
+                      color: "black",
+                      justifyContent: "left", 
+                    }}
+                    onClick={() => {
+                      handleCloseNavMenu();
+                      const section = document.getElementById(page.toLowerCase());
+                      section?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box>
 
-              {/* Sign In button (inside menu)
-                  CHANGED: call handleCloseNavMenu then onSignInClick from parent to open Login dialog */}
+              {/* Sign In button (inside menu)*/}
               <MenuItem>
               {showSignIn && (
                 <Button
@@ -99,7 +122,7 @@ const handlebookConsultation = () => {
                   sx={{ color: "black", borderColor: "black" }}
                   onClick={() => {
                     handleCloseNavMenu();        // close the mobile menu first
-                    onSignInClick?.();           // notify parent to open Login dialog
+                    onSignInClick?.();           // open Login dialog
                   }}
                 >
                   Sign In
@@ -167,7 +190,6 @@ const handlebookConsultation = () => {
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", gap: 2 }}>
             
             {showSignIn && (
-            // CHANGED: desktop Sign In now calls onSignInClick to open Login dialog
             <Button
               variant="outlined"
               sx={{ color: "black", borderColor: "black" }}
