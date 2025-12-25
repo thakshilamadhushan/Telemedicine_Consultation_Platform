@@ -117,7 +117,7 @@ export default function Appointments() {
       elevation={0}
       sx={{
         border: "1px solid #ebebebff",
-        p: 3,
+        p: {xs:1, md:3},
         borderRadius: 4,
       }}
     >
@@ -136,18 +136,6 @@ export default function Appointments() {
         // Show join button only if session is within next 10 minutes
         const canJoinNow = app.location === "Video Call" && (diffMinutes <= 10 && diffMinutes > 0);
 
-        // DEBUG: log parsed date and status
-        console.log(
-          `app[${index}]`,
-          app.date,
-          app.time,
-          "=> parsed:",
-          sessionDateTime,
-          "valid?",
-          isValid,
-          "isCompleted?",
-          isCompleted
-        );
         return (
       
         <Paper
@@ -161,57 +149,125 @@ export default function Appointments() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
           }}
         >
-          {/* ROW: Doctor Image + Info */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Avatar src={app.doctorImage} sx={{ width: 80, height: 80 }}/>
+          {/* ROW */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: { xs: "flex-start", md: "center" },
+              gap: 2,
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            {/* Avatar */}
+            <Avatar
+              src={app.doctorImage}
+              sx={{ width: 80, height: 80 }}
+            />
 
-            <Box sx={{ flex: 1}} >
-              <Box sx={{flex: 1}} alignItems="center" display="flex" gap={1}>
-              <Typography sx={{ fontWeight: 600 }}>{app.patientName}</Typography>
-              <Chip
+            <Box sx={{ flex: 1, width: "100%" }}>
+              {/* Name + Status */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  flexWrap: "wrap",
+                }}
+              >
+                <Typography sx={{ fontWeight: 600 }}>
+                  {app.patientName}
+                </Typography>
+
+                <Chip
                   label={isCompleted ? "Completed" : "Upcoming"}
                   color={isCompleted ? "success" : "warning"}
                   size="small"
-                  sx={{ width: "fit-content", display: "flex", ml: "auto"}}
+                  sx={{ ml: "auto" }}
                 />
               </Box>
-              <Typography variant="body2" color="gray">
+
+              {/* Reason */}
+              <Typography variant="body2" color="gray" mt={0.5}>
                 {app.reason}
               </Typography>
 
-              <Typography variant="body2" display="flex" alignItems="center" gap={1}>
-                <CalendarMonthIcon /> {app.date} <ScheduleIcon/> {app.time} {app.location === "Video Call" ? (
-                  <VideocamIcon />
+              {/* Date / Time / Location */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 1,
+                  mt: 1,
+                  alignItems: "center",
+                }}
+              >
+                <CalendarMonthIcon fontSize="small" />
+                <Typography variant="body2">{app.date}</Typography>
+
+                <ScheduleIcon fontSize="small" />
+                <Typography variant="body2">{app.time}</Typography>
+
+                <Box display={"flex"} gap={1}>
+                {app.location === "Video Call" ? (
+                  <VideocamIcon fontSize="small" />
                 ) : (
-                  <LocationOnIcon />
-                )} {app.location}
-
-                {/* BUTTONS */}
-                <Box sx={{ mt: 1, display: "flex", gap: 1, justifyContent: "center", ml: "auto"}}>
-                  {!isCompleted && (
-                  <>
-                  <Button variant="contained" size="small">
-                    Chat
-                  </Button>
-                  {/* SHOW JOIN ONLY IN LAST 10 MINUTES */}
-                  {canJoinNow && (
-                    <Button variant="contained" size="small" onClick={joinSession}>
-                      Join Session
-                    </Button>
-                  )}
-                  <Button variant="outlined" size="small">
-                    Reschedule
-                  </Button>
-                  </>
-                  )}
-
-                  {isCompleted && (
-                    <Button variant="outlined" size="small">
-                      View Details
-                    </Button>
-                  )}
+                  <LocationOnIcon fontSize="small" />
+                )}
+                <Typography variant="body2">{app.location}</Typography>
                 </Box>
-              </Typography>
+              </Box>
+
+              {/* Buttons */}
+              <Box
+                sx={{
+                  mt: 2,
+                  display: "flex",
+                  gap: 1,
+                  flexWrap: "wrap",
+                  justifyContent: { xs: "space-between", md: "flex-end" },
+                }}
+              >
+                {!isCompleted && (
+                  <>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{ flex: { xs: 1, md: "unset" } }}
+                    >
+                      Chat
+                    </Button>
+
+                    {canJoinNow && (
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={joinSession}
+                        sx={{ flex: { xs: 1, md: "unset" } }}
+                      >
+                        Join Session
+                      </Button>
+                    )}
+
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      sx={{ flex: { xs: 1, md: "unset" } }}
+                    >
+                      Reschedule
+                    </Button>
+                  </>
+                )}
+
+                {isCompleted && (
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    sx={{ flex: { xs: 1, md: "unset" } }}
+                  >
+                    View Details
+                  </Button>
+                )}
+              </Box>
             </Box>
           </Box>
         </Paper>
