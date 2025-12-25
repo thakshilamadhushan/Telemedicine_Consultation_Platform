@@ -4,8 +4,13 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ErrorIcon from '@mui/icons-material/Error';
+import DrMichael from "../../../assets/DoctorsImages/Dr.Michael_Chen.jpg";
+import DrEmily from "../../../assets/DoctorsImages/Dr.Emily_Rodriguez.jpg";
+import DrJames from "../../../assets/DoctorsImages/Dr.James_Wilson.jpg";
+
 const importAll = (context) => context.keys().map(context);
 const icons = importAll(require.context("../../../assets/icons/UserProfile", false, /\.(png|jpe?g|svg)$/));
+
 
 const appointments = [
   {
@@ -14,7 +19,7 @@ const appointments = [
     date: "Dec 15, 2025",
     time: "10:00 AM",
     location: "Video Call",
-    doctorImage: "/assets/doc1.jpg",
+    doctorImage: DrMichael,
   },
   {
     doctorName: "Dr. Emily Rodriguez",
@@ -22,7 +27,7 @@ const appointments = [
     date: "Dec 20, 2025",
     time: "2:30 PM",
     location: "Medical Center - Floor 3",
-    doctorImage: "/assets/doc2.jpg",
+    doctorImage: DrEmily,
   },
   {
     doctorName: "Dr. James Wilson",
@@ -30,7 +35,7 @@ const appointments = [
     date: "Nov 05, 2025",
     time: "11:00 AM",
     location: "Video Call",
-    doctorImage: "/assets/doc3.jpg",
+    doctorImage: DrJames,
   }
 ];
 
@@ -98,14 +103,14 @@ const parseDateManual = (dateString, timeString) => {
 
 export default function Overview() {
   return (
-    <Box display="flex" mx="auto">
+    <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3}>
     <Paper
       elevation={0}
       sx={{
         border: "1px solid #c0c0c0ff",
-        p: 3,
+        p: { xs: 2, md: 3 },
         borderRadius: 4,
-        width: "40%",
+        width: { xs: "90%", md: "40%" },
         mx: "auto"
       }}
     >
@@ -129,10 +134,16 @@ export default function Overview() {
               boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box sx={{ 
+              display: "flex", 
+              alignItems: "center", 
+              gap: 2, 
+              flexDirection: { xs: "column", sm: "row" },
+              textAlign: { xs: "center", sm: "left" }, 
+              }}>
               <Avatar
                 src={app.doctorImage}
-                sx={{ width: 80, height: 80 }}
+                sx={{ width: { xs: 60, sm: 80 }, height: { xs: 60, sm: 80 } }}
               />
 
               <Box sx={{ flex: 1 }}>
@@ -155,24 +166,30 @@ export default function Overview() {
                   />
                 </Box>
 
-                <Typography variant="body2" color="gray">
+                <Typography variant="body2" color="gray" display={"flex"} justifyContent={"left"}>
                   {app.specialty}
                 </Typography>
 
                 <Typography
                   variant="body2"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    flexWrap: "wrap",
+                    justifyContent: { xs: "left", sm: "flex-start" },
+                  }}
                 >
                   <CalendarMonthIcon /> {app.date}
                   <ScheduleIcon /> {app.time}
+                  <Box display={"flex"} gap={1}>
                   {app.location === "Video Call" ? (
                     <VideocamIcon />
                   ) : (
                     <LocationOnIcon />
                   )}
                   {app.location}
+                  </Box>
                 </Typography>
               </Box>
             </Box>
@@ -181,7 +198,7 @@ export default function Overview() {
       })}
     </Paper>
 
-    <Box mx="auto">
+    <Box mx="auto" width={{ xs: "100%", md: "auto" }}>
          {/* Vital Information*/}
           <Paper
               elevation={0}
@@ -196,10 +213,21 @@ export default function Overview() {
                   Vital Information
                 </Typography>
                 
-                <Box display="flex" gap={2} justifyContent="center" flexWrap="center">
+              <Box 
+                display="flex"
+                gap={2}
+                justifyContent="center"
+                flexWrap="wrap"
+              >
               {medicalInfo.map((mi, index) => {
                 return (
-                  <Box key={index} display="flex" gap={2}>
+                  <Box 
+                    key={index} 
+                    display="flex" 
+                    gap={2} 
+                    flexDirection={{ xs: "column", sm: "row" }}
+                    width="100%"
+                  >
     
                     {/* Blood Type */}
                     <Paper
@@ -208,7 +236,7 @@ export default function Overview() {
                         backgroundColor: "#f1f1f1ff",
                         p: 2,
                         borderRadius: 4,
-                        width: "fix-content",
+                        width: { xs: "90%", sm: "fit-content" },
                       }}
                     >
                       <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -244,7 +272,7 @@ export default function Overview() {
                         backgroundColor: "#f1f1f1ff",
                         p: 2,
                         borderRadius: 4,
-                        width: "fix-content",
+                        width: { xs: "90%", sm: "fit-content" },
                       }}
                     >
                       <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -280,7 +308,7 @@ export default function Overview() {
                         backgroundColor: "#f1f1f1ff",
                         p: 2,
                         borderRadius: 4,
-                        width: "fix-content",
+                        width: { xs: "90%", sm: "fit-content" },
                       }}
                     >
                       <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -334,7 +362,7 @@ export default function Overview() {
                   <ErrorIcon sx={{ color: "red", fontSize: 30 }} /> Allergies
                 </Typography>
                 
-                <Box display="flex" gap={3} mb={3}>
+                <Box display="flex" gap={2} mb={3} flexWrap="wrap">
                 {mi.Allergies.split(",").map((item, i) => (
                 <Box
                   sx={{
@@ -358,7 +386,7 @@ export default function Overview() {
                   <img src={icons[0]} alt=" " width="30" height="30"/> Medical Conditions
                 </Typography>
                 
-                <Box display="flex" gap={3}>
+                <Box display="flex" gap={2} flexWrap="wrap">
                 {mi.MedicalConditions.split(",").map((item, i) => (
                 <Box
                   sx={{
@@ -407,7 +435,7 @@ export default function Overview() {
                       borderRadius: 4,
                     }}
                   >
-                    <Box display="flex" alignItems="center" ml={2}>
+                    <Box display="flex" alignItems="center" ml={2} gap={2} flexWrap="wrap">
                         <Box display="flex" alignItems="center" gap={2}>
                           <Box
                             sx={{

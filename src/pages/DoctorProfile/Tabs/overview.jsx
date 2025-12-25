@@ -1,4 +1,4 @@
-import {Box,Grid,Paper,Typography,Chip,Stack,Divider} from "@mui/material";
+import {Box,Grid,Paper,Typography,Chip,Stack,Divider,Card} from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StarIcon from "@mui/icons-material/Star";
@@ -31,50 +31,69 @@ export default function Overview() {
       {/* LEFT COLUMN */}
       <Grid item xs={12} md={8} container direction="column" spacing={3}>
         {/* TODAY OVERVIEW */}
-        <Grid item>
-          <Paper
+        <Box>
+          <Card
             elevation={0}
-            sx={{ p: 2, borderRadius: 4, border: "1px solid #c0c0c0ff" }}
+            sx={{
+              p: 2,
+              borderRadius: 4,
+              border: "1px solid #c0c0c0ff",
+            }}
           >
             <Typography variant="h6" mb={2}>
               Today's Overview
             </Typography>
-            <Grid container spacing={1}>
-              <Grid item xs={6} sm={3}>
+
+            {/* Cards Container */}
+            <Box
+              display="flex"
+              gap={2}
+              flexWrap="wrap"
+            >
+              {/* Card 1 */}
+              <Box width={{ xs: "45%", sm: "23%" }} height={"fit-content"}>
                 <StatCard
                   icon={<CalendarMonthIcon color="primary" />}
                   value="8"
                   label="Today's Appointments"
                   bg="#e6ebff"
                 />
-              </Grid>
-              <Grid item xs={6} sm={3}>
+              </Box>
+
+              {/* Card 2 */}
+              <Box width={{ xs: "45%", sm: "23%" }} height={"fit-content"}>
                 <StatCard
                   icon={<GroupsIcon sx={{ color: "green" }} />}
                   value="5248"
                   label="Total Patients"
                   bg="#e9ffe8"
                 />
-              </Grid>
-              <Grid item xs={6} sm={3}>
+              </Box>
+
+              {/* Card 3 */}
+              <Box width={{ xs: "45%", sm: "23%" }} height={"fit-content"}>
                 <StatCard
                   icon={<StarIcon sx={{ color: "#f5a623" }} />}
                   value="4.9"
                   label="Average Rating"
                   bg="#fff3d6"
                 />
-              </Grid>
-              <Grid item xs={6} sm={3}>
+              </Box>
+
+              {/* Card 4 */}
+              <Box width={{ xs: "45%", sm: "23%" }} height={"fit-content"}>
                 <StatCard
                   icon={<TrendingUpIcon sx={{ color: "purple" }} />}
                   value="98%"
                   label="Completion Rate"
                   bg="#f3e5ff"
                 />
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
+              </Box>
+            </Box>
+          </Card>
+        </Box>
+
+
 
         {/* PERFORMANCE METRICS */}
         <Grid item>
@@ -210,7 +229,7 @@ export default function Overview() {
             </Typography>
 
             <Typography fontWeight={600}>Specializations</Typography>
-            <Stack direction="row" spacing={1} mt={1} mb={2} flexWrap="wrap">
+            <Stack direction="row" spacing={1} mt={1} mb={2} sx={{flexWrap:"wrap", gap: 1}}>
               <Chip label="Cardiology" size="small" color="primary" />
               <Chip label="Heart Failure" size="small" color="primary" />
               <Chip label="Preventive Care" size="small" color="primary" />

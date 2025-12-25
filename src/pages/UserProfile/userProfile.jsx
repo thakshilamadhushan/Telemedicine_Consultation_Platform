@@ -10,6 +10,9 @@ import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import MailIcon from '@mui/icons-material/Mail';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -36,7 +39,7 @@ export default function UserProfile() {
         <Paper
           elevation={2}
           sx={{
-            p: 3,
+            p: {xs:2, md: 3},
             borderRadius: 4,
             mb: 4,
             display: "flex",
@@ -51,11 +54,11 @@ export default function UserProfile() {
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <Avatar
               src={user}
-              sx={{ width: 130, height: 130 }}
+              sx={{ width: {xs:100, md: 130}, height: {xs:100, md: 130} }}
             />
             <Stack spacing={1.2} sx={{ p: 1 }}>
               <Box display={"flex"} alignItems="center" gap={1}>
-                  <Typography variant="h6" >Sarah Johnson</Typography>
+                  <Typography fontSize={{xs: 17, md: 20}} fontWeight={700} >Sarah Johnson</Typography>
                   <Box
                       sx={{
                       px: 1,
@@ -71,8 +74,16 @@ export default function UserProfile() {
                   </Box>
               </Box>
               <Typography variant="body2" color="gray">Patient ID: PT-2023-0456</Typography>
-              <Typography variant="body2">sarah.johnson@email.com</Typography>
-              <Typography variant="body2">Yakkala, Sri Lanka</Typography>
+              <Box display={"flex"} gap={{xs: 1, md:15}} flexDirection={{ xs: "column", sm: "row" }}>
+              <Box display={"flex"} flexDirection={"column"} gap={1}>
+              <Box display={"flex"} alignItems={"center"} gap={1}><MailIcon/><Typography variant="body2">sarah.johnson@email.com</Typography></Box>
+              <Box display={"flex"} alignItems={"center"} gap={1}><LocationOnIcon/><Typography variant="body2">Yakkala, Sri Lanka</Typography></Box>
+              </Box>
+              <Box display={"flex"} flexDirection={"column"} gap={1}>
+              <Box display={"flex"} alignItems={"center"} gap={1}><PhoneIcon/><Typography variant="body2">+94 79 123 4567</Typography></Box>
+              <Typography variant="body2">Member Since January 2025</Typography>
+              </Box>
+              </Box>
             </Stack>
           </Box>
 

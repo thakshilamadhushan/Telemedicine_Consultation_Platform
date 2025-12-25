@@ -41,10 +41,10 @@ export default function MedicalInfo() {
               Vital Information
             </Typography>
             
-            <Box display="flex" gap={2} justifyContent="center" flexWrap="center">
+          <Box display="flex" gap={2} justifyContent="center" flexWrap="center">
           {medicalInfo.map((mi, index) => {
             return (
-              <Box key={index} display="flex" gap={2}>
+              <Box key={index} display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2} width={"100%"}>
 
                 {/* Blood Type */}
                 <Paper
@@ -53,7 +53,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 400,
+                    width: {xs: 250, md:400},
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -89,7 +89,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 400,
+                    width: {xs: 250, md:400},
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
@@ -125,7 +125,7 @@ export default function MedicalInfo() {
                     backgroundColor: "#f1f1f1ff",
                     p: 2,
                     borderRadius: 4,
-                    width: 400,
+                    width: {xs: 250, md:400},
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} ml={2}>
